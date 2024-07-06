@@ -95,6 +95,12 @@
           "options": {
             "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "https://rolling-scopes-school.github.io/nuttik-ANGULAR2024Q3/"
+          }
         }
       }
     }
