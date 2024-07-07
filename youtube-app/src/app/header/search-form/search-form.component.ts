@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { SearchService } from '../../search/search.service';
 
 @Component({
   selector: 'app-search-form',
@@ -13,8 +14,13 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class SearchFormComponent {
   inputControl = new FormControl('');
+  searchService = new SearchService();
 
   onSearch() {
-    console.log('Input Value:', this.inputControl.value);
+    if (this.inputControl.value) {
+      this.searchService.setSearchTerm(this.inputControl.value);
+
+      console.log('Input Value:', this.searchService.getSearchTerm());
+    }
   }
 }

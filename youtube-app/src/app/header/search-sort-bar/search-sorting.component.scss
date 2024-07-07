@@ -1,31 +1,46 @@
 :host {
+  display: flex;
+  align-items: flex-start;
+  font-size: 0.75rem;
+  color: #929292;
+  gap: 0.5rem;
+  margin-top: 1rem;
+
+  ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    gap: 1rem;
+  }
+  li {
+    display: flex;
+    width: max-content;
+    gap: 0.5rem;
+    color: #2f80ed;
+    cursor: pointer;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: #5ea2ff;
+      }
+    }
+  }
   form {
     display: flex;
     align-items: flex-start;
     margin: 0 auto;
-    padding-top: 1.25rem;
-  }
-
-  button {
-    border-radius: 0 0.25rem 0.25rem 0;
-    background-color: #2f80ed;
-    box-shadow: 2px 0 4px #2f80eda6;
-    font-weight: 400;
-    font-size: 0.75rem;
-    height: 1.5rem;
   }
   ::ng-deep mat-form-field {
-    width: 24.75rem;
-  }
-
-  ::ng-deep mat-form-field .mat-mdc-text-field-wrapper {
-    background-color: #efefef;
-    font-size: 0.75rem;
-    height: 1.5rem;
+    width: 9.5rem;
   }
 
   ::ng-deep .mdc-text-field {
-    border-radius: 0.25rem 0 0 0.25rem;
+    border-radius: 0.25rem;
+  }
+
+  ::ng-deep mat-form-field .mat-mdc-text-field-wrapper {
+    background-color: #fff;
+    font-size: 0.75rem;
+    height: 1.5rem;
   }
 
   ::ng-deep .mat-mdc-form-field-infix {
