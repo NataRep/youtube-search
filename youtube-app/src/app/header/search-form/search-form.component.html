@@ -1,9 +1,9 @@
-<form (ngSubmit)="onSearch()" class="search-form">
-  <mat-form-field appearance="fill">
+<form (ngSubmit)="onSearch()">
+  <mat-form-field appearance="outline">
     <input
       matInput
       [formControl]="inputControl"
-      placeholder="Enter something podcast"
+      placeholder="What are you want to find out?"
     />
   </mat-form-field>
   <button mat-flat-button color="primary" type="submit">search</button>
