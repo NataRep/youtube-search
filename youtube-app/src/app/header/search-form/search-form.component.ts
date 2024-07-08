@@ -21,13 +21,12 @@ import { SearchService } from '../../search/search.service';
 })
 export class SearchFormComponent {
   inputControl = new FormControl('');
-  searchService = new SearchService();
+
+  constructor(private searchService: SearchService) {}
 
   onSearch() {
     if (this.inputControl.value) {
       this.searchService.setSearchTerm(this.inputControl.value);
-
-      console.log('Input Value:', this.searchService.getSearchTerm());
     }
   }
 }

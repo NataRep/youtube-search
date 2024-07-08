@@ -24,12 +24,9 @@ export class SearchItemComponent implements OnInit {
     this.dateStatusClass = this.getDateStatusClass(
       this.item.snippet.publishedAt
     );
-    console.log(this.item.snippet.publishedAt);
-    console.log(`Date status class:${this.dateStatusClass}`);
   }
 
   getDateStatusClass(publishedAt: string): string {
-    console.log(getStatusClass(publishedAt));
     return getStatusClass(publishedAt);
   }
 }
