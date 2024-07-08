@@ -39,7 +39,7 @@ interface Localized {
   description: string;
 }
 
-interface Statistics {
+export interface Statistics {
   viewCount: string;
   likeCount: string;
   dislikeCount: string;
