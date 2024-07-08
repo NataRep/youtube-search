@@ -4,7 +4,7 @@ export interface SearchResponse {
   kind: string;
   etag: string;
   pageInfo: PageInfo;
-  items: Item;
+  items: Item[];
 }
 
 interface PageInfo {
