@@ -4,6 +4,7 @@ import { Item } from '../../models/search-item.model';
 import { Subscription } from 'rxjs';
 import { SearchService } from '../search.service';
 import { SearchItemComponent } from '../search-item/search-item.component';
+import { AST } from '@angular/compiler';
 
 const MOCDATA = {
   kind: 'youtube#videoListResponse',
@@ -773,6 +774,11 @@ const MOCDATA = {
   ],
 };
 
+export enum SortOrder {
+  ASC = 'ascending',
+  DESC = 'descending',
+}
+
 @Component({
   selector: 'app-search-results',
   standalone: true,
@@ -783,32 +789,56 @@ const MOCDATA = {
 export class SearchResultsComponent implements OnInit {
   videos: Item[] = [];
   filteredVideos: Item[] = [];
+  foundVideos: Item[] = [];
   searchQuery: string = '';
-  private subscription!: Subscription;
+  sortQuery: string = '';
+  sortDateOrder: SortOrder = SortOrder.ASC;
+  sortCountViewOrder: SortOrder = SortOrder.ASC;
+  private subscriptionSearchTerm!: Subscription;
+  private subscriptionSortTerm!: Subscription;
 
   constructor(private searchService: SearchService) {}
 
   ngOnInit(): void {
     this.videos = MOCDATA.items;
+    this.foundVideos = [];
     this.filteredVideos = [];
 
-    this.subscription = this.searchService.getSearchTerm().subscribe((term) => {
-      this.searchQuery = term;
-      this.filterVideos();
-    });
+    this.subscriptionSearchTerm = this.searchService
+      .getSearchTerm()
+      .subscribe((term) => {
+        this.searchQuery = term;
+        this.searchVideos();
+      });
+
+    this.subscriptionSortTerm = this.searchService
+      .getSortTerm()
+      .subscribe((term) => {
+        this.sortQuery = term;
+        this.filterVideos();
+      });
   }
 
-  filterVideos(): void {
+  searchVideos(): void {
+    console.log('search');
     if (this.searchQuery != '') {
       this.filteredVideos = this.videos.filter((video) =>
         video.snippet.title
           .toLowerCase()
           .includes(this.searchQuery.toLowerCase())
       );
+      this.foundVideos = this.filteredVideos;
     }
   }
 
+  filterVideos(): void {
+    this.filteredVideos = this.foundVideos.filter((video) =>
+      video.snippet.title.toLowerCase().includes(this.sortQuery.toLowerCase())
+    );
+  }
+
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptionSearchTerm.unsubscribe();
+    this.subscriptionSortTerm.unsubscribe();
   }
 }

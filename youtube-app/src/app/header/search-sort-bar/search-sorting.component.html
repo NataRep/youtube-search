@@ -1,10 +1,12 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <p>Sorting by:</p>
 <ul>
   <li>date</li>
   <li>count of views</li>
-  <li>
+  <li (click)="onSubmit($event)">
     by word or sentance:
-    <form>
+    <form (submit)="onSubmit($event)">
       <mat-form-field appearance="outline">
         <input matInput [formControl]="inputControl" />
       </mat-form-field>
