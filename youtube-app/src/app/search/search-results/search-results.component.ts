@@ -797,6 +797,7 @@ export class SearchResultsComponent implements OnInit {
   private subscriptionSearchTerm!: Subscription;
   private subscriptionSortTerm!: Subscription;
   private subscriptionSortDate!: Subscription;
+  private subscriptionSortCountView!: Subscription;
 
   constructor(private searchService: SearchService) {}
 
@@ -824,6 +825,13 @@ export class SearchResultsComponent implements OnInit {
       .subscribe((order) => {
         this.sortDateOrder = order;
         this.sortVideosByDate();
+      });
+
+    this.subscriptionSortCountView = this.searchService
+      .getSortCountViewOrder()
+      .subscribe((order) => {
+        this.sortCountViewOrder = order;
+        this.sortVideosByCountView();
       });
   }
 
@@ -857,6 +865,22 @@ export class SearchResultsComponent implements OnInit {
         (videoA, videoB) =>
           new Date(videoB.snippet.publishedAt).getTime() -
           new Date(videoA.snippet.publishedAt).getTime()
+      );
+    }
+  }
+
+  sortVideosByCountView(): void {
+    if (this.sortCountViewOrder === SortOrder.ASC) {
+      this.filteredVideos = this.filteredVideos.sort(
+        (videoA, videoB) =>
+          Number(videoA.statistics.viewCount) -
+          Number(videoB.statistics.viewCount)
+      );
+    } else {
+      this.filteredVideos = this.filteredVideos.sort(
+        (videoA, videoB) =>
+          Number(videoB.statistics.viewCount) -
+          Number(videoA.statistics.viewCount)
       );
     }
   }
