@@ -4,7 +4,6 @@ import { Item } from '../../models/search-item.model';
 import { Subscription } from 'rxjs';
 import { SearchService } from '../search.service';
 import { SearchItemComponent } from '../search-item/search-item.component';
-import { AST } from '@angular/compiler';
 
 const MOCDATA = {
   kind: 'youtube#videoListResponse',
@@ -885,8 +884,10 @@ export class SearchResultsComponent implements OnInit {
     }
   }
 
-  ngOnDestroy(): void {
+  OnDestroy(): void {
     this.subscriptionSearchTerm.unsubscribe();
     this.subscriptionSortTerm.unsubscribe();
+    this.subscriptionSortDate.unsubscribe();
+    this.subscriptionSortCountView.unsubscribe();
   }
 }
