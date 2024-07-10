@@ -15,7 +15,6 @@ export class SearchService {
     this.searchTerm.next(term);
   }
   getSearchTerm() {
-    console.log('3');
     return this.searchTerm.asObservable();
   }
 
@@ -27,7 +26,8 @@ export class SearchService {
   }
 
   setSortDateOrder(): void {
-    if (this.sortDateOrder === new BehaviorSubject<SortOrder>(SortOrder.ASC)) {
+    const currentOrder = this.sortDateOrder.value;
+    if (currentOrder === SortOrder.ASC) {
       this.sortDateOrder.next(SortOrder.DESC);
     } else {
       this.sortDateOrder.next(SortOrder.ASC);
@@ -38,9 +38,8 @@ export class SearchService {
   }
 
   setSortCountViewOrder(): void {
-    if (
-      this.sortCountViewOrder === new BehaviorSubject<SortOrder>(SortOrder.ASC)
-    ) {
+    const currentOrder = this.sortCountViewOrder.value;
+    if (currentOrder === SortOrder.ASC) {
       this.sortCountViewOrder.next(SortOrder.DESC);
     } else {
       this.sortCountViewOrder.next(SortOrder.ASC);

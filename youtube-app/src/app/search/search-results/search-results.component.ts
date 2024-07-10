@@ -796,6 +796,7 @@ export class SearchResultsComponent implements OnInit {
   sortCountViewOrder: SortOrder = SortOrder.ASC;
   private subscriptionSearchTerm!: Subscription;
   private subscriptionSortTerm!: Subscription;
+  private subscriptionSortDate!: Subscription;
 
   constructor(private searchService: SearchService) {}
 
@@ -817,6 +818,13 @@ export class SearchResultsComponent implements OnInit {
         this.sortQuery = term;
         this.filterVideos();
       });
+
+    this.subscriptionSortDate = this.searchService
+      .getSortDateOrder()
+      .subscribe((order) => {
+        this.sortDateOrder = order;
+        this.sortVideosByDate();
+      });
   }
 
   searchVideos(): void {
@@ -835,6 +843,22 @@ export class SearchResultsComponent implements OnInit {
     this.filteredVideos = this.foundVideos.filter((video) =>
       video.snippet.title.toLowerCase().includes(this.sortQuery.toLowerCase())
     );
+  }
+
+  sortVideosByDate(): void {
+    if (this.sortDateOrder === SortOrder.ASC) {
+      this.filteredVideos = this.filteredVideos.sort(
+        (videoA, videoB) =>
+          new Date(videoA.snippet.publishedAt).getTime() -
+          new Date(videoB.snippet.publishedAt).getTime()
+      );
+    } else {
+      this.filteredVideos = this.filteredVideos.sort(
+        (videoA, videoB) =>
+          new Date(videoB.snippet.publishedAt).getTime() -
+          new Date(videoA.snippet.publishedAt).getTime()
+      );
+    }
   }
 
   ngOnDestroy(): void {

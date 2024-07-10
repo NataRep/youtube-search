@@ -27,4 +27,12 @@ export class SearchSortingComponent {
     this.onSortTerm();
     event.preventDefault();
   }
+
+  onSortDate(): void {
+    this.searchService.setSortDateOrder();
+  }
+
+  onSortCount(): void {
+    this.searchService.setSortCountViewOrder();
+  }
 }
