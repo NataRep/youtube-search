@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { Item } from '../../models/search-item.model';
 import { Subscription } from 'rxjs';
-import { SearchService } from '../search.service';
 import { SearchItemComponent } from '../search-item/search-item.component';
 import { MOCKDATA } from './mock-data';
+import { SearchService } from '../../services/search.service';
 
 export enum SortOrder {
   ASC = 'ascending',

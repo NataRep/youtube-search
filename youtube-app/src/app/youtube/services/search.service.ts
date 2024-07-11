@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { SortOrder } from './search-results/search-results.component';
+import { SortOrder } from '../components/search-results/search-results.component';
 
 @Injectable({
   providedIn: 'root',

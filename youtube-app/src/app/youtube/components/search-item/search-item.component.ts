@@ -4,7 +4,7 @@ import { getStatusClass } from './date-status.helper';
 
 import { SocialInfoRowComponent } from '../social-info-row/social-info-row.component';
 import { Item, Statistics } from '../../models/search-item.model';
-import { ButtonComponent } from '../../button/button.component';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
 
 @Component({
   selector: 'app-search-item',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { SearchService } from '../../search/search.service';
+import { SearchService } from '../../../../youtube/services/search.service';
 
 @Component({
   selector: 'app-search-sorting',

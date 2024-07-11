@@ -3,8 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { ButtonComponent } from '../../button/button.component';
-import { SearchService } from '../../search/search.service';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { SearchService } from '../../../../youtube/services/search.service';
 
 @Component({
   selector: 'app-search-form',
