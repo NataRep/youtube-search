@@ -1,9 +1,0 @@
-{
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "never"
-  },
-  "eslint.validate": [
-    "typescript",
-    "html"
-  ]
-}
