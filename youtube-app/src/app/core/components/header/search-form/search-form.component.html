@@ -1,0 +1,10 @@
+<form (submit)="filterResults($event, filter.value)">
+  <input type="text" placeholder="What are you want to find out?" #filter />
+  <button
+    mat-flat-button
+    type="button"
+    (click)="filterResults($event, filter.value)"
+  >
+    Search
+  </button>
+</form>

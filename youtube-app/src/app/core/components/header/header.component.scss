@@ -1,0 +1,22 @@
+:host {
+  padding: 0.5rem 0;
+  background: #e5e5e5;
+  display: flex;
+}
+.container {
+  width: 1200px;
+  margin: auto;
+  display: flex;
+}
+.tools-bar {
+  max-width: 570px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+}
