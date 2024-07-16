@@ -1,4 +1,4 @@
-<div class="item-card" [appVideoState]="item.snippet.publishedAt">
+<div class="item-card" [appCustomClass]="getItemPublishedDate()">
   <img [src]="item.snippet.thumbnails.medium.url" alt="" />
   <app-social-info
     [statistics]="item.statistics"

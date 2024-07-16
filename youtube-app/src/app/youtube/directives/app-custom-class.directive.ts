@@ -1,12 +1,15 @@
-import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, Renderer2, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[appVideoState]',
+  selector: '[appCustomClass]',
 })
-export class VideoStateDirective {
-  @Input() publishedAt!: string;
+export class AppCustomClassDirective implements OnInit {
+  @Input('appCustomClass') publishedAt!: string;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
+
+  ngOnInit() {
+    console.log('директива работает');
     this.changeClass();
   }
 

@@ -9,8 +9,9 @@ import { CoreService } from '../../../services/core.service';
 export class SearchFormComponent {
   constructor(private coreService: CoreService) {}
 
-  filterResults(event: Event, query: string) {
+  searchResults(event: Event, query: string) {
     event.preventDefault();
     this.coreService.searchTerm = query;
+    console.log(`Строка поиска ${this.coreService.searchTerm}`);
   }
 }

@@ -1,13 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VideoItemComponent } from './components/video-item/video-item.component';
 import { SocialInfoComponent } from './components/social-info/social-info.component';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
-import { VideoStateDirective } from './directives/video-state.directive';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { VideoItemComponent } from './components/video-item/video-item.component';
+
+import { AppCustomClassDirective } from './directives/app-custom-class.directive';
 
 @NgModule({
-  declarations: [VideoItemComponent, SocialInfoComponent, VideoStateDirective],
+  declarations: [
+    SocialInfoComponent,
+    SearchResultsComponent,
+    VideoItemComponent,
+    AppCustomClassDirective,
+  ],
   imports: [CommonModule, MatIconModule, SharedModule],
+  exports: [SearchResultsComponent],
 })
 export class YoutubeModule {}

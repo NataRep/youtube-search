@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Statistics } from '../../models/search-item.model';
 
 @Component({
@@ -6,12 +6,12 @@ import { Statistics } from '../../models/search-item.model';
   templateUrl: './social-info.component.html',
   styleUrl: './social-info.component.scss',
 })
-export class SocialInfoComponent {
+export class SocialInfoComponent implements OnInit {
   @Input() statistics!: Statistics;
 
   statisticsKeys!: { key: keyof Statistics; icon: string }[];
 
-  OnInit() {
+  ngOnInit() {
     this.statisticsKeys = [
       { key: 'viewCount', icon: 'visibility' },
       { key: 'likeCount', icon: 'thumb_up' },
