@@ -3,6 +3,10 @@
     <div class="search">
       <app-logo></app-logo>
       <app-search-form></app-search-form>
+      <app-search-sort-button
+        (click)="showSearchTools()"
+      ></app-search-sort-button>
     </div>
+    <app-search-sort-tools *ngIf="isSearchToolsVisible"></app-search-sort-tools>
   </div>
 </div>
