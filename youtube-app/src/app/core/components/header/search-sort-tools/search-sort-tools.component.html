@@ -1,1 +1,11 @@
-<p>search-sort-tools works!</p>
+<p>Sorting by:</p>
+<ul>
+  <li (click)="onSortDate()" aria-hidden="true">date</li>
+  <li (click)="onSortCount()" aria-hidden="true">count of views</li>
+  <li (click)="onSubmit($event, filter.value)" aria-hidden="true">
+    by word or sentence:
+    <form (submit)="onSubmit($event, filter.value)">
+      <input type="text" placeholder="" #filter />
+    </form>
+  </li>
+</ul>

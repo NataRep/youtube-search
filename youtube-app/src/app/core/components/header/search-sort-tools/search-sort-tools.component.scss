@@ -1,0 +1,50 @@
+:host {
+  display: flex;
+  align-items: flex-start;
+  font-size: 0.75rem;
+  color: #929292;
+  gap: 0.5rem;
+  margin-top: 1rem;
+
+  p {
+    width: max-content;
+    text-wrap: nowrap;
+  }
+
+  ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    gap: 1rem;
+  }
+  li {
+    display: flex;
+    width: max-content;
+    gap: 0.5rem;
+    color: var(--blue-primary);
+    cursor: pointer;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: #5ea2ff;
+      }
+    }
+  }
+  form {
+    display: flex;
+    align-items: flex-start;
+    margin: 0 auto;
+  }
+
+  input {
+    padding: 0.275rem 1rem;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    min-width: 240px;
+  }
+  input:focus {
+    outline: none;
+    outline: solid 2px #2f80ed;
+    outline-offset: -2px;
+  }
+}
