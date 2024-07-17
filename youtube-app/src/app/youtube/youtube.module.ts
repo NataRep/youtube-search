@@ -9,6 +9,8 @@ import { VideoItemComponent } from './components/video-item/video-item.component
 import { AppCustomClassDirective } from './directives/app-custom-class.directive';
 import { TrimVideoNamePipe } from './pipes/trim-video-name.pipe';
 import { SortVideoPipe } from './pipes/sort-video.pipe';
+import { MainComponent } from './pages/main/main.component';
+import { YouTubeRoutingModule } from './youtube-routing.module';
 
 @NgModule({
   declarations: [
@@ -18,8 +20,9 @@ import { SortVideoPipe } from './pipes/sort-video.pipe';
     AppCustomClassDirective,
     TrimVideoNamePipe,
     SortVideoPipe,
+    MainComponent,
   ],
-  imports: [CommonModule, MatIconModule, SharedModule],
+  imports: [CommonModule, MatIconModule, SharedModule, YouTubeRoutingModule],
   exports: [SearchResultsComponent],
 })
 export class YoutubeModule {}

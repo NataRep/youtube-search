@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CoreService } from '../../../services/core.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-form',
@@ -7,11 +8,11 @@ import { CoreService } from '../../../services/core.service';
   styleUrl: './search-form.component.scss',
 })
 export class SearchFormComponent {
-  constructor(private coreService: CoreService) {}
+  constructor(private coreService: CoreService, private router: Router) {}
 
   searchResults(event: Event, query: string) {
     event.preventDefault();
     this.coreService.searchTerm = query;
-    console.log(`Строка поиска ${this.coreService.searchTerm}`);
+    this.router.navigate(['/']);
   }
 }

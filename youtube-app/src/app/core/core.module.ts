@@ -7,10 +7,20 @@ import { SharedModule } from '../shared/shared.module';
 import { SearchSortButtonComponent } from './components/header/search-sort-button/search-sort-button.component';
 import { SearchSortToolsComponent } from './components/header/search-sort-tools/search-sort-tools.component';
 import { LoginButtonComponent } from './components/header/login-button/login-button.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { CoreRoutingModule } from './core-routing.module';
 
 @NgModule({
-  declarations: [HeaderComponent, LogoComponent, SearchFormComponent, SearchSortButtonComponent, SearchSortToolsComponent, LoginButtonComponent],
-  imports: [CommonModule, SharedModule],
+  declarations: [
+    HeaderComponent,
+    LogoComponent,
+    SearchFormComponent,
+    SearchSortButtonComponent,
+    SearchSortToolsComponent,
+    LoginButtonComponent,
+    NotFoundComponent,
+  ],
+  imports: [CommonModule, SharedModule, CoreRoutingModule],
   exports: [HeaderComponent],
 })
 export class CoreModule {}

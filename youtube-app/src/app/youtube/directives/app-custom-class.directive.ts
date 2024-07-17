@@ -9,7 +9,6 @@ export class AppCustomClassDirective implements OnInit {
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {
-    console.log('директива работает');
     this.changeClass();
   }
 
