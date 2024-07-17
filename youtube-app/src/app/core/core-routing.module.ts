@@ -6,6 +6,7 @@ const routes: Routes = [
   {
     path: '404',
     component: NotFoundComponent,
+    title: 'Not found',
   },
   { path: '**', redirectTo: '/404' },
 ];
