@@ -7,6 +7,7 @@ import { SearchResultsComponent } from './components/search-results/search-resul
 import { VideoItemComponent } from './components/video-item/video-item.component';
 
 import { AppCustomClassDirective } from './directives/app-custom-class.directive';
+import { TrimVideoNamePipe } from './pipes/trim-video-name.pipe';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { AppCustomClassDirective } from './directives/app-custom-class.directive
     SearchResultsComponent,
     VideoItemComponent,
     AppCustomClassDirective,
+    TrimVideoNamePipe,
   ],
   imports: [CommonModule, MatIconModule, SharedModule],
   exports: [SearchResultsComponent],

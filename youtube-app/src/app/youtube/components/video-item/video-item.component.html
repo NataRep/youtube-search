@@ -4,7 +4,9 @@
     [statistics]="item.statistics"
     class="social-row"
   ></app-social-info>
-  <div class="item-title">{{ item.snippet.title }}</div>
+  <div class="item-title" title="{{ item.snippet.title }}">
+    {{ item.snippet.title | trimVideoName }}
+  </div>
   <app-button>more..</app-button>
   <div class="underline"></div>
 </div>
