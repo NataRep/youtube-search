@@ -6,9 +6,10 @@ import { SearchFormComponent } from './components/header/search-form/search-form
 import { SharedModule } from '../shared/shared.module';
 import { SearchSortButtonComponent } from './components/header/search-sort-button/search-sort-button.component';
 import { SearchSortToolsComponent } from './components/header/search-sort-tools/search-sort-tools.component';
+import { LoginButtonComponent } from './components/header/login-button/login-button.component';
 
 @NgModule({
-  declarations: [HeaderComponent, LogoComponent, SearchFormComponent, SearchSortButtonComponent, SearchSortToolsComponent],
+  declarations: [HeaderComponent, LogoComponent, SearchFormComponent, SearchSortButtonComponent, SearchSortToolsComponent, LoginButtonComponent],
   imports: [CommonModule, SharedModule],
   exports: [HeaderComponent],
 })

@@ -5,6 +5,15 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class CoreService {
+  // for login //
+  private isLoginSubject = new BehaviorSubject<boolean>(false);
+  isLogin$ = this.isLoginSubject.asObservable();
+
+  private userNameSubject = new BehaviorSubject<string>('');
+  userName$ = this.userNameSubject.asObservable();
+
+  // for search //
+
   private searchTermSubject = new BehaviorSubject<string>('');
   searchTerm$ = this.searchTermSubject.asObservable();
 
@@ -19,10 +28,23 @@ export class CoreService {
 
   constructor() {}
 
+  set userName(value: string) {
+    this.userNameSubject.next(value);
+  }
+  get userName(): string {
+    return this.userNameSubject.value;
+  }
+
+  set isLogin(value: boolean) {
+    this.isLoginSubject.next(value);
+  }
+  get isLogin(): boolean {
+    return this.isLoginSubject.value;
+  }
+
   set searchTerm(value: string) {
     this.searchTermSubject.next(value);
   }
-
   get searchTerm(): string {
     return this.searchTermSubject.value;
   }
@@ -30,7 +52,6 @@ export class CoreService {
   set filterTerm(value: string) {
     this.filterTermSubject.next(value);
   }
-
   get filterTerm(): string {
     return this.filterTermSubject.value;
   }
@@ -38,7 +59,6 @@ export class CoreService {
   set sortByDate(value: boolean) {
     this.sortByDateSubject.next(value);
   }
-
   get sortByDate(): boolean {
     return this.sortByDateSubject.value;
   }
@@ -46,7 +66,6 @@ export class CoreService {
   set sortByCountView(value: boolean) {
     this.sortByCountViewSubject.next(value);
   }
-
   get sortByCountView(): boolean {
     return this.sortByCountViewSubject.value;
   }

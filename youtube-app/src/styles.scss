@@ -2,6 +2,7 @@
 :root {
   --blue-primary: #2f80ed;
   --blue-secondary: #2f80eda6;
+  --black-text: #4f4f4f;
 }
 html,
 body {
@@ -10,4 +11,5 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: var(--black-text);
 }

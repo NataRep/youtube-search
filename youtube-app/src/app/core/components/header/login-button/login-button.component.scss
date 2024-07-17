@@ -1,0 +1,23 @@
+:host {
+  button {
+    border-radius: 0.25rem;
+    background-color: var(--blue-primary);
+    box-shadow: 2px 0 4px var(--blue-secondary);
+    padding: 0;
+    height: 1.5rem;
+    min-width: 1.5rem;
+  }
+  mat-icon {
+    margin: 0;
+  }
+  .logout,
+  .login {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    p {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
