@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngFor="let video of finedVideos">
+  <div *ngFor="let video of finedVideos | sortVideo">
     <app-video-item [item]="video"></app-video-item>
   </div>
 </div>
