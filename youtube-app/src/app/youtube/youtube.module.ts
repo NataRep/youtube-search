@@ -5,12 +5,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { VideoItemComponent } from './components/video-item/video-item.component';
-
 import { AppCustomClassDirective } from './directives/app-custom-class.directive';
 import { TrimVideoNamePipe } from './pipes/trim-video-name.pipe';
 import { SortVideoPipe } from './pipes/sort-video.pipe';
 import { MainComponent } from './pages/main/main.component';
 import { YouTubeRoutingModule } from './youtube-routing.module';
+import { VideoDetailedInfoComponent } from './pages/video-detailed-info/video-detailed-info.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import { YouTubeRoutingModule } from './youtube-routing.module';
     TrimVideoNamePipe,
     SortVideoPipe,
     MainComponent,
+    VideoDetailedInfoComponent,
   ],
   imports: [CommonModule, MatIconModule, SharedModule, YouTubeRoutingModule],
   exports: [SearchResultsComponent],

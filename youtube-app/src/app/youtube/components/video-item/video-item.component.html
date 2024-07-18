@@ -7,6 +7,6 @@
   <div class="item-title" title="{{ item.snippet.title }}">
     {{ item.snippet.title | trimVideoName }}
   </div>
-  <app-button>more..</app-button>
+  <app-button [routerLink]="['/details', item.id]">more..</app-button>
   <div class="underline"></div>
 </div>

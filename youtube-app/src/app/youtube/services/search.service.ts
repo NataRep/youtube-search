@@ -16,4 +16,15 @@ export class SearchService {
       );
     } else return [];
   }
+
+  getVideoById(id: string): Item | undefined {
+    const video: Item | undefined = MOCKDATA.items.find(
+      (item) => item.id === id
+    );
+    if (video) {
+      return video;
+    } else {
+      return undefined;
+    }
+  }
 }
