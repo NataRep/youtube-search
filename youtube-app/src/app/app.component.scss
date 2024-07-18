@@ -8,8 +8,12 @@ main {
   margin: auto;
   padding: 2rem 0;
   flex: 1;
+  @media (max-width: 1200px) {
+    width: calc(100% - 4rem);
+    padding: 2rem;
+  }
 }
 .container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: auto;
 }

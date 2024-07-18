@@ -1,9 +1,13 @@
 :host {
   display: flex;
   font-size: 0.75rem;
+  align-items: center;
+  width: 100%;
+
   form {
     display: flex;
     align-items: center;
+    flex-grow: 1;
   }
   button {
     border-radius: 0 0.25rem 0.25rem 0;
@@ -19,6 +23,15 @@
     outline: none;
     background-color: #efefef;
     min-width: 396px;
+    flex-grow: 1;
+    @media (max-width: 768px) {
+      min-width: 240px;
+    }
+    @media (max-width: 570px) {
+      min-width: 140px;
+    }
+    @media (max-width: 480px) {
+    }
   }
   input:focus {
     outline: none;

@@ -6,6 +6,11 @@
   gap: 0.5rem;
   margin-top: 1rem;
 
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0rem;
+  }
+
   p {
     width: max-content;
     text-wrap: nowrap;
@@ -16,6 +21,10 @@
     padding: 0;
     margin: 0;
     gap: 1rem;
+    @media (max-width: 600px) {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
   }
   li {
     display: flex;
@@ -41,6 +50,10 @@
     outline: none;
     background-color: #fff;
     min-width: 240px;
+    @media (max-width: 460px) {
+      min-width: 140px;
+      width: 140px;
+    }
   }
   input:focus {
     outline: none;
