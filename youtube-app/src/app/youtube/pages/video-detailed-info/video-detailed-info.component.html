@@ -1,1 +1,27 @@
-<p>video-detailed-info works! {{ videoId }}</p>
+<button mat-flat-button color="primary" (click)="goBack()">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+<div class="video-card">
+  <img
+    [src]="video?.snippet?.thumbnails?.maxres?.url"
+    [alt]="video?.snippet?.title"
+  />
+  <div class="info">
+    <div class="text">
+      <div class="header-row">
+        <h1>{{ video?.snippet?.title }}</h1>
+        <div class="data">
+          {{ video?.snippet?.publishedAt | date : "fullDate" }}
+        </div>
+      </div>
+      <div class="desc">
+        <h2>Description:</h2>
+        <p>{{ video?.snippet?.description }}</p>
+      </div>
+    </div>
+    <app-social-info
+      [statistics]="video?.statistics"
+      class="social-row"
+    ></app-social-info>
+  </div>
+</div>

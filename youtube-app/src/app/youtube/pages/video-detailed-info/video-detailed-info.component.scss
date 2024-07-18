@@ -1,0 +1,18 @@
+:host {
+  button {
+    border-radius: 0.25rem 0 0 0.25rem;
+    background-color: var(--blue-primary);
+    box-shadow: 2px 0 4px var(--blue-secondary);
+    padding: 0;
+    height: 1.5rem;
+    min-width: 1.5rem;
+  }
+  .mat-mdc-unelevated-button:not(:disabled) {
+    background-color: var(--blue-primary);
+    box-shadow: 2px 0 4px var(--blue-secondary);
+  }
+  .mat-mdc-unelevated-button > .mat-icon {
+    margin: 0;
+    padding: 0;
+  }
+}

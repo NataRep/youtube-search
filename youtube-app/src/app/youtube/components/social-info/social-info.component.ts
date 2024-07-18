@@ -7,7 +7,7 @@ import { Statistics } from '../../models/search-item.model';
   styleUrl: './social-info.component.scss',
 })
 export class SocialInfoComponent implements OnInit {
-  @Input() statistics!: Statistics;
+  @Input() statistics: Statistics | undefined = undefined;
 
   statisticsKeys!: { key: keyof Statistics; icon: string }[];
 

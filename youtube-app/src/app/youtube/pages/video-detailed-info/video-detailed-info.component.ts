@@ -1,23 +1,44 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from '../../models/search-item.model';
 import { SearchService } from '../../services/search.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-video-detailed-info',
   templateUrl: './video-detailed-info.component.html',
   styleUrl: './video-detailed-info.component.scss',
 })
-export class VideoDetailedInfoComponent {
+export class VideoDetailedInfoComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   videoId: string = '';
   video: Item | undefined;
 
-  constructor(private service: SearchService, private router: Router) {
+  constructor(
+    private service: SearchService,
+    private router: Router,
+    private location: Location
+  ) {
     this.videoId = this.route.snapshot.params['id'];
+  }
+
+  ngOnInit(): void {
     this.video = this.service.getVideoById(this.videoId)
       ? this.service.getVideoById(this.videoId)
       : undefined;
     if (!this.video) this.router.navigate(['/404']);
+  }
+
+  goBack() {
+    // check the address of the previous page in case the detailed description page
+    // was accessed via a link not belonging to this application.
+    const referrer = document.referrer;
+    const currentHost = window.location.host;
+
+    if (referrer && new URL(referrer).host === currentHost) {
+      this.location.back();
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 }
