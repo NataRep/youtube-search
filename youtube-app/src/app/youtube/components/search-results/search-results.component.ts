@@ -11,6 +11,8 @@ import { Subscription } from 'rxjs';
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
   finedVideos!: Item[];
+  isFoundFalse: boolean = true;
+  isEmptySearch: boolean = true;
   private subscriptionSearchTerm!: Subscription;
 
   constructor(
@@ -21,7 +23,15 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptionSearchTerm = this.coreService.searchTerm$.subscribe(
       (query) => {
-        this.finedVideos = this.searchService.getFoundedVideos(query);
+        if (query.trim() !== '') {
+          this.finedVideos = this.searchService.getFoundedVideos(query);
+          this.isFoundFalse = this.finedVideos.length < 1;
+          this.isEmptySearch = false;
+        } else {
+          this.finedVideos = [];
+          this.isEmptySearch = true;
+          this.isFoundFalse = false;
+        }
       }
     );
   }
