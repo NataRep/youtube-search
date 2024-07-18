@@ -1,11 +1,13 @@
 <button mat-flat-button color="primary" (click)="goBack()">
   <mat-icon>arrow_back</mat-icon>
 </button>
-<div class="video-card">
-  <img
-    [src]="video?.snippet?.thumbnails?.maxres?.url"
-    [alt]="video?.snippet?.title"
-  />
+<div [appCustomClass]="video?.snippet?.publishedAt" class="video-card">
+  <div class="image">
+    <img
+      [src]="video?.snippet?.thumbnails?.maxres?.url"
+      [alt]="video?.snippet?.title"
+    />
+  </div>
   <div class="info">
     <div class="text">
       <div class="header-row">
@@ -19,9 +21,12 @@
         <p>{{ video?.snippet?.description }}</p>
       </div>
     </div>
-    <app-social-info
-      [statistics]="video?.statistics"
-      class="social-row"
-    ></app-social-info>
+    <div class="statistics">
+      <app-social-info
+        [statistics]="video?.statistics"
+        class="social-row"
+      ></app-social-info>
+      <div class="underline"></div>
+    </div>
   </div>
 </div>

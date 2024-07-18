@@ -4,7 +4,7 @@ import { Directive, ElementRef, Input, Renderer2, OnInit } from '@angular/core';
   selector: '[appCustomClass]',
 })
 export class AppCustomClassDirective implements OnInit {
-  @Input('appCustomClass') publishedAt!: string;
+  @Input('appCustomClass') publishedAt!: string | undefined;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
@@ -14,15 +14,18 @@ export class AppCustomClassDirective implements OnInit {
 
   changeClass() {
     let className = 'unknown-status';
-    if (this.isOlderThanSixMonths(this.publishedAt)) {
-      className = 'older-than-six-months';
-    } else if (this.isBetweenOneAndSixMonths(this.publishedAt)) {
-      className = 'between-one-and-six-months';
-    } else if (this.isBetweenSevenDaysAndOneMonth(this.publishedAt)) {
-      className = 'between-seven-days-and-one-month';
-    } else if (this.isNewerThanSevenDays(this.publishedAt)) {
-      className = 'newer-than-seven-days';
+    if (this.publishedAt) {
+      if (this.isOlderThanSixMonths(this.publishedAt)) {
+        className = 'older-than-six-months';
+      } else if (this.isBetweenOneAndSixMonths(this.publishedAt)) {
+        className = 'between-one-and-six-months';
+      } else if (this.isBetweenSevenDaysAndOneMonth(this.publishedAt)) {
+        className = 'between-seven-days-and-one-month';
+      } else if (this.isNewerThanSevenDays(this.publishedAt)) {
+        className = 'newer-than-seven-days';
+      }
     }
+
     this.renderer.addClass(this.el.nativeElement, className);
   }
 

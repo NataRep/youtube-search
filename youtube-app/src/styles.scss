@@ -3,6 +3,7 @@
   --blue-primary: #2f80ed;
   --blue-secondary: #2f80eda6;
   --black-text: #4f4f4f;
+  --grey-bg: #e5e5e5;
 }
 html,
 body {
@@ -12,4 +13,8 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   color: var(--black-text);
+}
+.mat-typography {
+  font: 400 0.75rem / 1.25rem Roboto, sans-serif;
+  letter-spacing: 0.031rem;
 }
