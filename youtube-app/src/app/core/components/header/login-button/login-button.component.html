@@ -1,5 +1,5 @@
 <div class="logout" *ngIf="isLogin; else loggedOut">
-  <p>{{ userName }}</p>
+  <p>Hello, {{ userName }}</p>
   <button mat-flat-button color="primary" (click)="logout()">
     <mat-icon>logout</mat-icon>
   </button>
