@@ -5,13 +5,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class CoreService {
-  // for login //
-  private isLoginSubject = new BehaviorSubject<boolean>(false);
-  isLogin$ = this.isLoginSubject.asObservable();
-
-  private userNameSubject = new BehaviorSubject<string>('');
-  userName$ = this.userNameSubject.asObservable();
-
   // for search //
 
   private searchTermSubject = new BehaviorSubject<string>('');
@@ -27,20 +20,6 @@ export class CoreService {
   sortByCountView$ = this.sortByCountViewSubject.asObservable();
 
   constructor() {}
-
-  set userName(value: string) {
-    this.userNameSubject.next(value);
-  }
-  get userName(): string {
-    return this.userNameSubject.value;
-  }
-
-  set isLogin(value: boolean) {
-    this.isLoginSubject.next(value);
-  }
-  get isLogin(): boolean {
-    return this.isLoginSubject.value;
-  }
 
   set searchTerm(value: string) {
     this.searchTermSubject.next(value);

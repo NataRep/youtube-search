@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CoreService } from '../../../services/core.service';
+import { AuthService } from '../../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-login-button',
@@ -10,8 +10,8 @@ export class LoginButtonComponent {
   userName: string = '';
   isLogin: boolean = false;
 
-  constructor(private coreService: CoreService) {
-    this.userName = this.coreService.userName;
-    this.isLogin = this.coreService.isLogin;
+  constructor(private authService: AuthService) {
+    this.userName = this.authService.userName;
+    this.isLogin = this.authService.isLogin;
   }
 }
