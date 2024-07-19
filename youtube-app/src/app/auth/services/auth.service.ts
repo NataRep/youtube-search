@@ -33,6 +33,7 @@ export class AuthService {
     const newToken = this.generateRandomToken();
     localStorage.setItem('youtube-app-token', newToken);
     localStorage.setItem('youtube-app-username', this.userName);
+    console.log(this.isLogin());
   }
 
   logout(): void {

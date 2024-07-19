@@ -1,31 +1,34 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service'; // Замените на путь к вашему сервису
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.scss',
+  styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent {
-  loginForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
-  });
+  loginForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {
+    this.loginForm = new FormGroup({
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+    });
+  }
 
-  login(): void {
-    const username = this.loginForm.get('username')!.value;
-    const password = this.loginForm.get('password')!.value;
+  onSubmit(): void {
+    if (this.loginForm.invalid) {
+      if (this.loginForm.valid) {
+        const username = this.loginForm.get('username')!.value;
 
-    if (username && typeof password === 'string') {
-      this.authService.auth(username);
-      console.log(this.authService.isLogin());
+        this.authService.auth(username);
+
+        // сделать редирект на страницу поиска
+      }
     }
   }
 }
