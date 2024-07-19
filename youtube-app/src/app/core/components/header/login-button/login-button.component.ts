@@ -12,6 +12,6 @@ export class LoginButtonComponent {
 
   constructor(private authService: AuthService) {
     this.userName = this.authService.userName;
-    this.isLogin = this.authService.isLogin;
+    this.isLogin = this.authService.isLogin();
   }
 }

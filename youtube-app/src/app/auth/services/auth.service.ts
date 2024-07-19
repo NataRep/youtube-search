@@ -21,7 +21,6 @@ export class AuthService {
     const token = localStorage.getItem('youtube-app-token');
     if (token) {
       this.userName = localStorage.getItem('youtube-app-username')!;
-      this.auth(this.userName);
       this.isLoginSubject.next(true);
     } else {
       this.isLoginSubject.next(false);
@@ -30,22 +29,16 @@ export class AuthService {
   }
 
   auth(username: string): void {
-    const token = localStorage.getItem('youtube-app-token');
-    if (token) {
-      this.userName = localStorage.getItem('youtube-app-username')!;
-      this.isLoginSubject.next(true);
-    } else {
-      this.userName = username;
-      const newToken = this.generateRandomToken();
-      localStorage.setItem('youtube-app-token', newToken);
-    }
+    this.userName = username;
+    const newToken = this.generateRandomToken();
+    localStorage.setItem('youtube-app-token', newToken);
+    localStorage.setItem('youtube-app-username', this.userName);
   }
 
   logout(): void {
     this.isLoginSubject.next(false);
     localStorage.removeItem('youtube-app-token');
     localStorage.removeItem('youtube-app-username');
-
     this.router.navigate(['/login']);
   }
 
