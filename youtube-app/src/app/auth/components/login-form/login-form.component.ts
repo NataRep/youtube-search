@@ -21,14 +21,13 @@ export class LoginFormComponent {
   }
 
   onSubmit(): void {
-    if (this.loginForm.invalid) {
-      if (this.loginForm.valid) {
-        const username = this.loginForm.get('username')!.value;
+    if (this.loginForm.valid) {
+      console.log('!!!');
+      const username = this.loginForm.get('username')!.value;
 
-        this.authService.auth(username);
+      this.authService.auth(username);
 
-        // сделать редирект на страницу поиска
-      }
+      // сделать редирект на страницу поиска
     }
   }
 }
