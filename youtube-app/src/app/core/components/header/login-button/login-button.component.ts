@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../../../../auth/services/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,16 +13,26 @@ export class LoginButtonComponent implements OnInit, OnDestroy {
   isLogin: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private cd: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.authService.userName$.subscribe((name) => (this.userName = name))
+      this.authService.userName$.subscribe((name) => {
+        this.userName = name;
+        //Forced change tracking for correct application operation in different tabs
+        this.cd.detectChanges();
+      })
     );
     this.subscriptions.add(
-      this.authService.isLogin$.subscribe(
-        (loginStatus) => (this.isLogin = loginStatus)
-      )
+      this.authService.isLogin$.subscribe((loginStatus) => {
+        this.isLogin = loginStatus;
+        // Forced change tracking for correct application operation in different tabs
+        this.cd.detectChanges();
+      })
     );
   }
 
