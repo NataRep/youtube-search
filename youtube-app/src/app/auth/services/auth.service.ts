@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,14 +13,17 @@ export class AuthService {
   private userNameSubject = new BehaviorSubject<string>('');
   userName$ = this.userNameSubject.asObservable();
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private localStorage: LocalStorageService
+  ) {
     this.checkInitialLoginState();
   }
 
   private checkInitialLoginState(): void {
-    const token = localStorage.getItem('youtube-app-token');
+    const token = this.localStorage.getToken();
     if (token) {
-      const userName = localStorage.getItem('youtube-app-username')!;
+      const userName = this.localStorage.getUsername()!;
       this.auth(userName, token);
       this.isLoginSubject.next(true);
     } else {
@@ -31,18 +35,18 @@ export class AuthService {
     this.userName = username;
     if (!token) {
       const newToken = this.generateRandomToken();
-      localStorage.setItem('youtube-app-token', newToken);
+      this.localStorage.setToken(newToken);
     } else {
-      localStorage.setItem('youtube-app-token', token);
+      this.localStorage.setToken(token);
     }
-    localStorage.setItem('youtube-app-username', this.userName);
+    this.localStorage.setUsername(this.userName);
     this.isLoginSubject.next(true);
   }
 
   logout(): void {
     this.isLoginSubject.next(false);
-    localStorage.removeItem('youtube-app-token');
-    localStorage.removeItem('youtube-app-username');
+    this.localStorage.removeToken();
+    this.localStorage.removeUsername();
     this.router.navigate(['/login']);
   }
 
