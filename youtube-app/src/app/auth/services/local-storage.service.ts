@@ -29,4 +29,8 @@ export class LocalStorageService {
   removeUsername(): void {
     localStorage.removeItem('youtube-app-username');
   }
+
+  updateUserStatus() {
+    localStorage.setItem('auth-update', new Date().toISOString());
+  }
 }
