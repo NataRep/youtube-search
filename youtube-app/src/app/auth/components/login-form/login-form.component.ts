@@ -25,6 +25,7 @@ export class LoginFormComponent {
     if (this.loginForm.valid) {
       const username = this.loginForm.get('username')!.value;
       this.authService.auth(username);
+      this.router.navigate(['']);
     }
   }
 }
