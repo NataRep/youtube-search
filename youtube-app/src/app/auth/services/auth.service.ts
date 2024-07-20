@@ -75,9 +75,16 @@ export class AuthService {
   private handleStorageChange(event: StorageEvent): void {
     if (event.key === 'auth-update') {
       this.checkInitialLoginState();
-      if (!this.isLoggedIn && this.router.url !== 'login') {
+      console.log(this.router.url);
+
+      if (!this.isLoggedIn && this.router.url !== '/login') {
         // Redirect to login if not authenticated
         this.router.navigate(['login']);
+      }
+
+      if (this.isLoggedIn && this.router.url == '/login') {
+        // Redirect to main if authenticated
+        this.router.navigate(['']);
       }
     }
   }

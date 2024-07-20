@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service'; // Замените на путь к вашему сервису
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -10,7 +11,7 @@ import { AuthService } from '../../services/auth.service'; // Замените �
 export class LoginFormComponent {
   loginForm: FormGroup;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.loginForm = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', [
@@ -22,12 +23,8 @@ export class LoginFormComponent {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      console.log('!!!');
       const username = this.loginForm.get('username')!.value;
-
       this.authService.auth(username);
-
-      // сделать редирект на страницу поиска
     }
   }
 }
