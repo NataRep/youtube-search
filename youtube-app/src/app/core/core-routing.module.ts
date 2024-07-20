@@ -8,7 +8,6 @@ const routes: Routes = [
     component: NotFoundComponent,
     title: 'Not found',
   },
-  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({

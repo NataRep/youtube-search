@@ -16,9 +16,8 @@ const routes: Routes = [
   },
   {
     path: '**',
-    loadChildren: () => import('./core/core.module').then((m) => m.CoreModule),
-
-    canActivate: [AuthGuard],
+    redirectTo: '404',
+    pathMatch: 'full',
   },
 ];
 
