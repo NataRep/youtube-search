@@ -6,34 +6,37 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  // for login //
   private isLoginSubject = new BehaviorSubject<boolean>(false);
   isLogin$ = this.isLoginSubject.asObservable();
 
   private userNameSubject = new BehaviorSubject<string>('');
   userName$ = this.userNameSubject.asObservable();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this.checkInitialLoginState();
+  }
 
-  isLogin(): boolean {
-    // Check that the user has previously logged into the application
-    // If an entry has been made previously, automatic logging is performed.
+  private checkInitialLoginState(): void {
     const token = localStorage.getItem('youtube-app-token');
     if (token) {
-      this.userName = localStorage.getItem('youtube-app-username')!;
+      const userName = localStorage.getItem('youtube-app-username')!;
+      this.auth(userName, token);
       this.isLoginSubject.next(true);
     } else {
       this.isLoginSubject.next(false);
     }
-    return this.isLoginSubject.value;
   }
 
-  auth(username: string): void {
+  auth(username: string, token?: string): void {
     this.userName = username;
-    const newToken = this.generateRandomToken();
-    localStorage.setItem('youtube-app-token', newToken);
+    if (!token) {
+      const newToken = this.generateRandomToken();
+      localStorage.setItem('youtube-app-token', newToken);
+    } else {
+      localStorage.setItem('youtube-app-token', token);
+    }
     localStorage.setItem('youtube-app-username', this.userName);
-    console.log(this.isLogin());
+    this.isLoginSubject.next(true);
   }
 
   logout(): void {

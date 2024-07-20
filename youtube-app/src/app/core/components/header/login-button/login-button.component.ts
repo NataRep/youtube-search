@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../../auth/services/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -6,17 +6,14 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-login-button',
   templateUrl: './login-button.component.html',
-  styleUrl: './login-button.component.scss',
+  styleUrls: ['./login-button.component.scss'],
 })
-export class LoginButtonComponent implements OnInit {
+export class LoginButtonComponent implements OnInit, OnDestroy {
   userName: string = '';
   isLogin: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private authService: AuthService, private router: Router) {
-    this.userName = this.authService.userName;
-    this.isLogin = this.authService.isLogin();
-  }
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -29,6 +26,10 @@ export class LoginButtonComponent implements OnInit {
     );
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
   goToLogin() {
     this.router.navigate(['/login']);
   }
@@ -36,6 +37,5 @@ export class LoginButtonComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.goToLogin();
-    console.log(this.authService.isLogin());
   }
 }
