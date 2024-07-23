@@ -18,15 +18,17 @@ export class VideoDetailedInfoComponent implements OnInit {
     private service: SearchService,
     private router: Router,
     private location: Location
-  ) {
-    this.videoId = this.route.snapshot.params['id'];
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.video = this.service.getVideoById(this.videoId)
-      ? this.service.getVideoById(this.videoId)
-      : undefined;
-    if (!this.video) this.router.navigate(['/404']);
+    this.videoId = this.route.snapshot.params['id'];
+    this.loadVideo();
+  }
+  private loadVideo(): void {
+    this.video = this.service.getVideoById(this.videoId);
+    if (!this.video) {
+      this.router.navigate(['/404']);
+    }
   }
 
   goBack() {
