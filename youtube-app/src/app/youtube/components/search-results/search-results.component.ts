@@ -24,16 +24,23 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.subscriptionSearchTerm = this.coreService.searchTerm$.subscribe(
       (query) => {
         if (query.trim() !== '') {
-          this.finedVideos = this.searchService.getFoundedVideos(query);
-          this.isFoundFalse = this.finedVideos.length < 1;
-          this.isEmptySearch = false;
+          this.searchVideo(query);
         } else {
-          this.finedVideos = [];
-          this.isEmptySearch = true;
-          this.isFoundFalse = false;
+          this.resetSearch();
         }
       }
     );
+  }
+  searchVideo(query: string): void {
+    this.finedVideos = this.searchService.getFoundedVideos(query);
+    this.isFoundFalse = this.finedVideos.length < 1;
+    this.isEmptySearch = false;
+  }
+
+  resetSearch(): void {
+    this.finedVideos = [];
+    this.isEmptySearch = true;
+    this.isFoundFalse = false;
   }
 
   ngOnDestroy() {
