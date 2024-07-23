@@ -1,6 +1,6 @@
-<div class="social-statistics">
+<div class="social-statistics" *ngIf="statistics">
   <div *ngFor="let stat of statisticsKeys" class="stat-item">
     <mat-icon>{{ stat.icon }}</mat-icon>
-    <span *ngIf="statistics">{{ statistics[stat.key] }}</span>
+    <span>{{ statistics[stat.key] }}</span>
   </div>
 </div>
