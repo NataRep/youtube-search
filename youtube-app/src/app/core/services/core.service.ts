@@ -19,6 +19,9 @@ export class CoreService {
   private sortByCountViewSubject = new BehaviorSubject<boolean>(false);
   sortByCountView$ = this.sortByCountViewSubject.asObservable();
 
+  private forwardDirectionSubject = new BehaviorSubject<boolean>(true);
+  forwardDirection$ = this.forwardDirectionSubject.asObservable();
+
   constructor() {}
 
   set searchTerm(value: string) {
@@ -47,5 +50,12 @@ export class CoreService {
   }
   get sortByCountView(): boolean {
     return this.sortByCountViewSubject.value;
+  }
+
+  set forwardDirection(value: boolean) {
+    this.forwardDirectionSubject.next(value);
+  }
+  get forwardDirection(): boolean {
+    return this.forwardDirectionSubject.value;
   }
 }

@@ -17,10 +17,12 @@ export class SearchSortToolsComponent {
   onSortDate(): void {
     this.coreService.sortByDate = true;
     this.coreService.sortByCountView = false;
+    this.coreService.forwardDirection = !this.coreService.forwardDirection;
   }
 
   onSortCount(): void {
     this.coreService.sortByDate = false;
     this.coreService.sortByCountView = true;
+    this.coreService.forwardDirection = !this.coreService.forwardDirection;
   }
 }

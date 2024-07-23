@@ -13,16 +13,31 @@ export class SortVideoPipe implements PipeTransform {
     let sortedItems = [...items];
 
     if (this.coreService.sortByDate) {
-      sortedItems = sortedItems.sort(
-        (a, b) =>
-          new Date(b.snippet.publishedAt).getTime() -
-          new Date(a.snippet.publishedAt).getTime()
-      );
+      if (this.coreService.forwardDirection) {
+        sortedItems = sortedItems.sort(
+          (a, b) =>
+            new Date(a.snippet.publishedAt).getTime() -
+            new Date(b.snippet.publishedAt).getTime()
+        );
+      } else {
+        sortedItems = sortedItems.sort(
+          (a, b) =>
+            new Date(b.snippet.publishedAt).getTime() -
+            new Date(a.snippet.publishedAt).getTime()
+        );
+      }
     } else if (this.coreService.sortByCountView) {
-      sortedItems = sortedItems.sort(
-        (a, b) =>
-          Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
-      );
+      if (this.coreService.forwardDirection) {
+        sortedItems = sortedItems.sort(
+          (a, b) =>
+            Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
+        );
+      } else {
+        sortedItems = sortedItems.sort(
+          (a, b) =>
+            Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
+        );
+      }
     }
 
     if (this.coreService.filterTerm) {
