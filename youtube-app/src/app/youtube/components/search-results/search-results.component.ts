@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Item } from '../../models/search-item.model';
-import { CoreService } from '../../../core/services/core.service';
-import { SearchService } from '../../services/search.service';
+import { Item } from '../../../core/models/search-item.model';
+import { SortService } from '../../../core/services/sort.service';
+import { SearchService } from '../../../core/services/search.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -17,11 +17,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   constructor(
     private searchService: SearchService,
-    private coreService: CoreService
+    private sortService: SortService
   ) {}
 
   ngOnInit() {
-    this.subscriptionSearchTerm = this.coreService.searchTerm$.subscribe(
+    this.subscriptionSearchTerm = this.sortService.searchTerm$.subscribe(
       (query) => {
         if (query.trim() !== '') {
           this.searchVideo(query);

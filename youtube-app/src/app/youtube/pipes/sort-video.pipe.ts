@@ -1,19 +1,19 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { CoreService } from '../../core/services/core.service';
-import { Item } from '../models/search-item.model';
+import { SortService } from '../../core/services/sort.service';
+import { Item } from '../../core/models/search-item.model';
 
 @Pipe({
   name: 'sortVideo',
   pure: false,
 })
 export class SortVideoPipe implements PipeTransform {
-  constructor(private coreService: CoreService) {}
+  constructor(private sortService: SortService) {}
 
   transform(items: Item[]): Item[] {
     let sortedItems = [...items];
 
-    if (this.coreService.sortByDate) {
-      if (this.coreService.forwardDirection) {
+    if (this.sortService.sortByDate) {
+      if (this.sortService.forwardDirection) {
         sortedItems = sortedItems.sort(
           (a, b) =>
             new Date(a.snippet.publishedAt).getTime() -
@@ -26,8 +26,8 @@ export class SortVideoPipe implements PipeTransform {
             new Date(a.snippet.publishedAt).getTime()
         );
       }
-    } else if (this.coreService.sortByCountView) {
-      if (this.coreService.forwardDirection) {
+    } else if (this.sortService.sortByCountView) {
+      if (this.sortService.forwardDirection) {
         sortedItems = sortedItems.sort(
           (a, b) =>
             Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
@@ -40,11 +40,11 @@ export class SortVideoPipe implements PipeTransform {
       }
     }
 
-    if (this.coreService.filterTerm) {
+    if (this.sortService.filterTerm) {
       sortedItems = sortedItems.filter((item) =>
         item.snippet.title
           .toLowerCase()
-          .includes(this.coreService.filterTerm.toLowerCase())
+          .includes(this.sortService.filterTerm.toLowerCase())
       );
     }
 

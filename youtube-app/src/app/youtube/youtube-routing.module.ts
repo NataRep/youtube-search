@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './pages/main/main.component';
 import { VideoDetailedInfoComponent } from './pages/video-detailed-info/video-detailed-info.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,11 @@ const routes: Routes = [
     path: 'details/:id',
     component: VideoDetailedInfoComponent,
     title: 'Video detailed info',
+  },
+  {
+    path: '404',
+    component: NotFoundComponent,
+    title: 'Not found',
   },
 ];
 

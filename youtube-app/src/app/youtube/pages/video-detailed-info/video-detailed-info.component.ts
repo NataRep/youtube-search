@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Item } from '../../models/search-item.model';
-import { SearchService } from '../../services/search.service';
+import { Item } from '../../../core/models/search-item.model';
+import { SearchService } from '../../../core/services/search.service';
 import { Location } from '@angular/common';
 
 @Component({

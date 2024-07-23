@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class CoreService {
+export class SortService {
   // for search //
 
   private searchTermSubject = new BehaviorSubject<string>('');

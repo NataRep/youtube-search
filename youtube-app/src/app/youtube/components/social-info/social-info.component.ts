@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Statistics } from '../../models/search-item.model';
+import { Statistics } from '../../../core/models/search-item.model';
 
 @Component({
   selector: 'app-social-info',
