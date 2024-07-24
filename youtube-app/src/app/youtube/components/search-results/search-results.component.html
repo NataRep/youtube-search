@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="finedVideos$ | async as finedVideos">
+  <ng-container *ngIf="finedVideos$ | async as finedVideos">
     <div *ngFor="let video of finedVideos | sortVideo">
       <app-video-item [item]="video"></app-video-item>
     </div>
@@ -11,5 +11,5 @@
         <p>Sorry, nothing was found for your request.</p>
       </div>
     </ng-template>
-  </div>
+  </ng-container>
 </div>
