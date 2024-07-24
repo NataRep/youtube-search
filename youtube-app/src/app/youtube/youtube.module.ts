@@ -17,6 +17,7 @@ import { LoginButtonComponent } from './components/hearder/login-button/login-bu
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
 import { YouTubeRoutingModule } from './youtube-routing.module';
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { YouTubeRoutingModule } from './youtube-routing.module';
     SearchSortButtonComponent,
     SearchSortToolsComponent,
     LoginButtonComponent,
+    SafeUrlPipe,
   ],
   imports: [CommonModule, MatIconModule, SharedModule, YouTubeRoutingModule],
   exports: [SearchResultsComponent, HeaderComponent],
