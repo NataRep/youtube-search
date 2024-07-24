@@ -1,32 +1,39 @@
 <button mat-flat-button color="primary" (click)="goBack()">
   <mat-icon>arrow_back</mat-icon>
 </button>
-<div [appCustomClass]="video?.snippet?.publishedAt" class="video-card">
-  <div class="image">
-    <img
-      [src]="video?.snippet?.thumbnails?.maxres?.url"
-      [alt]="video?.snippet?.title"
-    />
-  </div>
-  <div class="info">
-    <div class="text">
-      <div class="header-row">
-        <h1>{{ video?.snippet?.title }}</h1>
-        <div class="data">
-          {{ video?.snippet?.publishedAt | date : "fullDate" }}
+
+<ng-container *ngIf="video$ | async as video; else loading">
+  <div [appCustomClass]="video?.snippet?.publishedAt" class="video-card">
+    <div class="image">
+      <img
+        [src]="video?.snippet?.thumbnails?.maxres?.url"
+        [alt]="video?.snippet?.title"
+      />
+    </div>
+    <div class="info">
+      <div class="text">
+        <div class="header-row">
+          <h1>{{ video?.snippet?.title }}</h1>
+          <div class="data">
+            {{ video?.snippet?.publishedAt | date : "fullDate" }}
+          </div>
+        </div>
+        <div class="desc">
+          <h2>Description:</h2>
+          <p>{{ video?.snippet?.description }}</p>
         </div>
       </div>
-      <div class="desc">
-        <h2>Description:</h2>
-        <p>{{ video?.snippet?.description }}</p>
+      <div class="statistics">
+        <app-social-info
+          [statistics]="video?.statistics"
+          class="social-row"
+        ></app-social-info>
+        <div class="underline"></div>
       </div>
     </div>
-    <div class="statistics">
-      <app-social-info
-        [statistics]="video?.statistics"
-        class="social-row"
-      ></app-social-info>
-      <div class="underline"></div>
-    </div>
   </div>
-</div>
+</ng-container>
+
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>
