@@ -32,6 +32,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     );
   }
   searchVideo(query: string): void {
+    this.resetSearch();
     this.finedVideos$ = this.searchService.getVideosWithStatistics(query);
     this.finedVideos$.subscribe((videos) => {
       this.isFoundFalse = videos.length < 1;

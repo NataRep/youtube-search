@@ -38,8 +38,6 @@ export class SearchService {
       .set('part', 'statistics')
       .set('id', videoId);
 
-    console.log(videoId);
-
     return this.http
       .get<{ items: { statistics: Statistics }[] }>(`${this.baseURL}/videos`, {
         params,
