@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from '../../../core/models/search-item.model';
 import { SearchService } from '../../../core/services/search.service';
 import { Location } from '@angular/common';
+import { catchError, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-video-detailed-info',
@@ -13,9 +14,10 @@ export class VideoDetailedInfoComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   videoId: string = '';
   video: Item | undefined;
+  video$!: Observable<Item>;
 
   constructor(
-    private service: SearchService,
+    private searchService: SearchService,
     private router: Router,
     private location: Location
   ) {}
@@ -25,15 +27,22 @@ export class VideoDetailedInfoComponent implements OnInit {
     this.loadVideo();
   }
   private loadVideo(): void {
-    this.video = this.service.getVideoById(this.videoId);
-    if (!this.video) {
-      this.router.navigate(['/404']);
-    }
+    this.video$ = this.searchService.getVideoById(this.videoId);
+    this.video$
+      .pipe(
+        catchError((error) => {
+          console.error('Ошибка при загрузке видео:', error);
+          this.router.navigate(['/404']);
+          return of(null);
+        })
+      )
+      .subscribe((video) => {
+        console.log(video);
+        if (!video) this.router.navigate(['/404']);
+      });
   }
 
   goBack() {
-    // check the address of the previous page in case the detailed description page
-    // was accessed via a link not belonging to this application.
     const referrer = document.referrer;
     const currentHost = window.location.host;
 

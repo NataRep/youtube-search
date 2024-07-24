@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { MOCKDATA } from '../../../assets/images/mockdata';
 import { Item, Statistics } from '../models/search-item.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { concatMap, map, mergeMap, switchMap, toArray } from 'rxjs/operators';
+import { map, mergeMap, switchMap, toArray } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 @Injectable({
@@ -35,9 +34,8 @@ export class SearchService {
   getVideoStatistics(videoId: string): Observable<Statistics> {
     const params = new HttpParams()
       .set('key', this.apiKey)
-      .set('part', 'statistics')
-      .set('id', videoId);
-
+      .set('id', videoId)
+      .set('part', 'statistics');
     return this.http
       .get<{ items: { statistics: Statistics }[] }>(`${this.baseURL}/videos`, {
         params,
@@ -61,7 +59,7 @@ export class SearchService {
       switchMap((videos) =>
         videos.length
           ? of(...videos).pipe(
-              concatMap((video: Item) => {
+              mergeMap((video: Item) => {
                 // Проверяем, является ли id объектом и извлекаем videoId
                 const videoId =
                   typeof video.id === 'string' ? video.id : video.id.videoId;
@@ -80,7 +78,24 @@ export class SearchService {
     );
   }
 
-  getVideoById(id: string): Item | undefined {
-    return MOCKDATA.items.find((item) => item.id === id);
+  getVideoById(id: string): Observable<Item> {
+    const params = new HttpParams()
+      .set('key', this.apiKey)
+      .set('id', id)
+      .set('part', 'statistics, snippet');
+
+    return this.http
+      .get<{ items: Item[] }>(`${this.baseURL}/videos`, {
+        params,
+      })
+      .pipe(
+        map((response) => {
+          if (response.items && response.items.length > 0) {
+            return response.items[0];
+          } else {
+            throw new Error('Video not found');
+          }
+        })
+      );
   }
 }
