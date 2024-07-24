@@ -1,7 +1,7 @@
 export interface Item {
   kind: string;
   etag: string;
-  id: string;
+  id: { kind: string; videoId: string } | string;
   snippet: Snippet;
   statistics: Statistics;
 }
