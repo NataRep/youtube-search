@@ -4,11 +4,14 @@
 
 <ng-container *ngIf="video$ | async as video; else loading">
   <div [appCustomClass]="video?.snippet?.publishedAt" class="video-card">
-    <div class="image">
-      <img
-        [src]="video?.snippet?.thumbnails?.maxres?.url"
-        [alt]="video?.snippet?.title"
-      />
+    <div class="video">
+      <iframe
+        [src]="videoURL | safeUrl"
+        width="560"
+        height="315"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
     </div>
     <div class="info">
       <div class="text">

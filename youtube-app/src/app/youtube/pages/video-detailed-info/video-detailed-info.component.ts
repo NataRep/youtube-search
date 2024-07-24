@@ -13,6 +13,7 @@ import { catchError, Observable, of } from 'rxjs';
 export class VideoDetailedInfoComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   videoId: string = '';
+  videoURL: string = '';
   video: Item | undefined;
   video$!: Observable<Item>;
 
@@ -37,8 +38,9 @@ export class VideoDetailedInfoComponent implements OnInit {
         })
       )
       .subscribe((video) => {
-        console.log(video);
-        if (!video) this.router.navigate(['/404']);
+        const videoId =
+          typeof video!.id === 'string' ? video!.id : video!.id.videoId;
+        this.videoURL = `https://www.youtube.com/embed/${videoId}`;
       });
   }
 
