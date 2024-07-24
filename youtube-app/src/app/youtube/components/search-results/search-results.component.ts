@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Item } from '../../../core/models/search-item.model';
 import { SortService } from '../../../core/services/sort.service';
 import { SearchService } from '../../../core/services/search.service';
-import { Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search-results',
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './search-results.component.scss',
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
-  finedVideos!: Item[];
+  finedVideos$!: Observable<Item[]>;
   isFoundFalse: boolean = true;
   isEmptySearch: boolean = true;
   private subscriptionSearchTerm!: Subscription;
@@ -32,13 +32,15 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     );
   }
   searchVideo(query: string): void {
-    this.finedVideos = this.searchService.getFoundedVideos(query);
-    this.isFoundFalse = this.finedVideos.length < 1;
-    this.isEmptySearch = false;
+    this.finedVideos$ = this.searchService.getFoundedVideos(query);
+    this.finedVideos$.subscribe((videos) => {
+      this.isFoundFalse = videos.length < 1;
+      this.isEmptySearch = false;
+    });
   }
 
   resetSearch(): void {
-    this.finedVideos = [];
+    this.finedVideos$ = of([]);
     this.isEmptySearch = true;
     this.isFoundFalse = false;
   }

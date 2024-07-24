@@ -4,11 +4,12 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { YoutubeModule } from './youtube/youtube.module';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, YoutubeModule],
-  providers: [provideAnimationsAsync()],
+  providers: [provideAnimationsAsync(), provideHttpClient()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,13 +1,15 @@
 <div class="container">
-  <div *ngFor="let video of finedVideos | sortVideo">
-    <app-video-item [item]="video"></app-video-item>
-  </div>
-  <ng-container *ngIf="isEmptySearch; else notFoundTemplate">
-    <p>Write what you want to see!</p>
-  </ng-container>
-  <ng-template #notFoundTemplate>
-    <div *ngIf="isFoundFalse">
-      <p>Sorry, nothing was found for your request.</p>
+  <div *ngIf="finedVideos$ | async as finedVideos">
+    <div *ngFor="let video of finedVideos | sortVideo">
+      <app-video-item [item]="video"></app-video-item>
     </div>
-  </ng-template>
+    <ng-container *ngIf="isEmptySearch; else notFoundTemplate">
+      <p>Write what you want to see!</p>
+    </ng-container>
+    <ng-template #notFoundTemplate>
+      <div *ngIf="isFoundFalse">
+        <p>Sorry, nothing was found for your request.</p>
+      </div>
+    </ng-template>
+  </div>
 </div>

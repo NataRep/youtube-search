@@ -13,6 +13,7 @@ export class VideoItemComponent implements OnInit {
 
   ngOnInit() {
     this.statistics = this.item.statistics;
+    console.log(this.item);
   }
   getItemPublishedDate(): string {
     return this.item.snippet.publishedAt;
