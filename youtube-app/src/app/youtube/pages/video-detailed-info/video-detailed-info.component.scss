@@ -35,6 +35,7 @@
   .video-card {
     display: flex;
     min-height: 26rem;
+    width: 100%;
     align-items: stretch;
     background-color: var(--grey-bg);
     border-radius: 0 0.5rem 0.5rem 0.5rem;
@@ -69,7 +70,7 @@
     @media (max-width: 1200px) {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      padding-bottom: 56.25%;
       height: 0;
       overflow: hidden;
       max-width: 100%;
@@ -89,6 +90,7 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 2rem;
+    flex: 1;
   }
   .text {
     padding: 2rem;

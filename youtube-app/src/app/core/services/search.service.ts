@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Item, Statistics } from '../models/search-item.model';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, mergeMap, switchMap, toArray } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+} from '@angular/common/http';
+import { catchError, map, mergeMap, switchMap, toArray } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root',
@@ -10,7 +14,28 @@ import { environment } from '../../../environments/environment';
 export class SearchService {
   baseURL: string = '/youtube-api';
   apiKey: string = environment.apiKey;
+  queryAttempts: number = 0;
+
   constructor(private http: HttpClient) {}
+
+  private handleError403<T>(
+    error: HttpErrorResponse,
+    retryCallback: () => Observable<T>
+  ): Observable<T> {
+    // Этот обработчик ошибки проверяет была превышена квота запросов по ключу,
+    // и меняю ключ на альтернативный
+    if (error.status === 403 && this.queryAttempts < 1) {
+      this.queryAttempts += 1;
+      this.apiKey =
+        this.apiKey === environment.apiKey
+          ? environment.apiKeyAlternative
+          : environment.apiKey;
+      return retryCallback();
+    } else {
+      console.error('Ошибка при запросе:', error);
+      return throwError(() => error);
+    }
+  }
 
   getFoundedVideos(query: string, maxResults: number = 12): Observable<Item[]> {
     const trimQuery = query.toLocaleLowerCase().trim();
@@ -25,7 +50,17 @@ export class SearchService {
 
       return this.http
         .get<{ items: Item[] }>(this.baseURL + '/search', { params })
-        .pipe(map((response) => response.items));
+        .pipe(
+          map((response) => {
+            this.queryAttempts = 0;
+            return response.items;
+          }),
+          catchError((error) =>
+            this.handleError403(error, () =>
+              this.getFoundedVideos(query, maxResults)
+            )
+          )
+        );
     } else {
       return of([]);
     }
@@ -43,11 +78,15 @@ export class SearchService {
       .pipe(
         map((response) => {
           if (response.items && response.items.length > 0) {
+            this.queryAttempts = 0;
             return response.items[0].statistics;
           } else {
             throw new Error('No statistics found');
           }
-        })
+        }),
+        catchError((error) =>
+          this.handleError403(error, () => this.getVideoStatistics(videoId))
+        )
       );
   }
 
@@ -91,11 +130,15 @@ export class SearchService {
       .pipe(
         map((response) => {
           if (response.items && response.items.length > 0) {
+            this.queryAttempts = 0;
             return response.items[0];
           } else {
             throw new Error('Video not found');
           }
-        })
+        }),
+        catchError((error) =>
+          this.handleError403(error, () => this.getVideoById(id))
+        )
       );
   }
 }
