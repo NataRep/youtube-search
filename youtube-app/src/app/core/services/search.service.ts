@@ -12,30 +12,10 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class SearchService {
-  baseURL: string = '/youtube-api';
   apiKey: string = environment.apiKey;
   queryAttempts: number = 0;
 
   constructor(private http: HttpClient) {}
-
-  private handleError403<T>(
-    error: HttpErrorResponse,
-    retryCallback: () => Observable<T>
-  ): Observable<T> {
-    // Этот обработчик ошибки проверяет была превышена квота запросов по ключу,
-    // и меняю ключ на альтернативный
-    if (error.status === 403 && this.queryAttempts < 1) {
-      this.queryAttempts += 1;
-      this.apiKey =
-        this.apiKey === environment.apiKey
-          ? environment.apiKeyAlternative
-          : environment.apiKey;
-      return retryCallback();
-    } else {
-      console.error('Ошибка при запросе:', error);
-      return throwError(() => error);
-    }
-  }
 
   getFoundedVideos(query: string, maxResults: number = 12): Observable<Item[]> {
     const trimQuery = query.toLocaleLowerCase().trim();
@@ -48,19 +28,12 @@ export class SearchService {
         .set('order', 'rating')
         .set('maxResults', maxResults.toString());
 
-      return this.http
-        .get<{ items: Item[] }>(this.baseURL + '/search', { params })
-        .pipe(
-          map((response) => {
-            this.queryAttempts = 0;
-            return response.items;
-          }),
-          catchError((error) =>
-            this.handleError403(error, () =>
-              this.getFoundedVideos(query, maxResults)
-            )
-          )
-        );
+      return this.http.get<{ items: Item[] }>('/search', { params }).pipe(
+        map((response) => {
+          this.queryAttempts = 0;
+          return response.items;
+        })
+      );
     } else {
       return of([]);
     }
@@ -72,7 +45,7 @@ export class SearchService {
       .set('id', videoId)
       .set('part', 'statistics');
     return this.http
-      .get<{ items: { statistics: Statistics }[] }>(`${this.baseURL}/videos`, {
+      .get<{ items: { statistics: Statistics }[] }>(`/videos`, {
         params,
       })
       .pipe(
@@ -83,10 +56,7 @@ export class SearchService {
           } else {
             throw new Error('No statistics found');
           }
-        }),
-        catchError((error) =>
-          this.handleError403(error, () => this.getVideoStatistics(videoId))
-        )
+        })
       );
   }
 
@@ -124,7 +94,7 @@ export class SearchService {
       .set('part', 'statistics, snippet');
 
     return this.http
-      .get<{ items: Item[] }>(`${this.baseURL}/videos`, {
+      .get<{ items: Item[] }>(`/videos`, {
         params,
       })
       .pipe(
@@ -135,10 +105,7 @@ export class SearchService {
           } else {
             throw new Error('Video not found');
           }
-        }),
-        catchError((error) =>
-          this.handleError403(error, () => this.getVideoById(id))
-        )
+        })
       );
   }
 }
