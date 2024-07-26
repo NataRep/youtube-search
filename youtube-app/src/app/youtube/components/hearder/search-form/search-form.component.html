@@ -1,10 +1,7 @@
-<form (submit)="searchResults($event, filter.value)">
-  <input type="text" placeholder="What are you want to find out?" #filter />
-  <button
-    mat-flat-button
-    type="button"
-    (click)="searchResults($event, filter.value)"
-  >
-    Search
-  </button>
+<form [formGroup]="searchForm" (ngSubmit)="onSubmitResults()">
+  <input
+    formControlName="query"
+    type="text"
+    placeholder="What are you want to find out?"
+  />
 </form>

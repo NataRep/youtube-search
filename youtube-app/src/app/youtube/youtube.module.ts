@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
 import { YouTubeRoutingModule } from './youtube-routing.module';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,13 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
     LoginButtonComponent,
     SafeUrlPipe,
   ],
-  imports: [CommonModule, MatIconModule, SharedModule, YouTubeRoutingModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    SharedModule,
+    YouTubeRoutingModule,
+    ReactiveFormsModule,
+  ],
   exports: [SearchResultsComponent, HeaderComponent],
 })
 export class YoutubeModule {}
