@@ -17,10 +17,7 @@ import { authInterceptor } from './core/interceptors/auth.interceptor';
   imports: [BrowserModule, AppRoutingModule, YoutubeModule],
   providers: [
     provideAnimationsAsync(),
-    provideHttpClient(
-      withFetch(),
-      withInterceptors([shorteningInterceptor, authInterceptor])
-    ),
+    provideHttpClient(withFetch(), withInterceptors([shorteningInterceptor])),
   ],
   bootstrap: [AppComponent],
 })
