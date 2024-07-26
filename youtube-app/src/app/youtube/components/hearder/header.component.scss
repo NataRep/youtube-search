@@ -20,6 +20,7 @@
   }
 }
 .tools-bar {
+  width: calc(100% - 4rem);
   max-width: 570px;
   margin: auto;
   display: flex;
@@ -40,10 +41,15 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    width: 100%;
 
     @media (max-width: 480px) {
       flex-direction: column;
       align-items: flex-start;
+    }
+
+    app-search-form {
+      flex: 1;
     }
   }
 }

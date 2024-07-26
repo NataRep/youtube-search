@@ -22,16 +22,7 @@
     border: none;
     outline: none;
     background-color: #efefef;
-    min-width: 396px;
     flex-grow: 1;
-    @media (max-width: 768px) {
-      min-width: 240px;
-    }
-    @media (max-width: 570px) {
-      min-width: 140px;
-    }
-    @media (max-width: 480px) {
-    }
   }
   input:focus {
     outline: none;
