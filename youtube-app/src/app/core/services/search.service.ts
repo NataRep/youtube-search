@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Item, Statistics } from '../models/search-item.model';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpParams,
-} from '@angular/common/http';
-import { catchError, map, mergeMap, switchMap, toArray } from 'rxjs/operators';
-import { Observable, of, throwError } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { map, mergeMap, switchMap, toArray } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root',
