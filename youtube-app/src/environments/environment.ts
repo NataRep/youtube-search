@@ -1,7 +1,4 @@
-export const environment: Environment = {
+export const environment = {
+  production: true,
   apiKey: `AIzaSyBqCik0stmr7QP6W5eMCVmS9zyqBNPRu7A`,
 };
-
-interface Environment {
-  apiKey: string;
-}
