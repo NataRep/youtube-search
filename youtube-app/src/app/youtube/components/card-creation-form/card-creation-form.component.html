@@ -71,7 +71,12 @@
           Tag is required
         </mat-error>
       </mat-form-field>
-      <button mat-icon-button *ngIf="tags.length > 1" (click)="removeTag(i)">
+      <button
+        mat-icon-button
+        *ngIf="tags.length > 1"
+        (click)="removeTag(i)"
+        type="button"
+      >
         <mat-icon>remove</mat-icon>
       </button>
     </div>
@@ -80,6 +85,6 @@
     Add tag
   </app-button>
 
-  <app-button>Submit</app-button>
-  <app-button (click)="resetForm()">Reset</app-button>
+  <app-button type="submit">Submit</app-button>
+  <app-button (click)="resetForm()" type="reset">Reset</app-button>
 </form>
