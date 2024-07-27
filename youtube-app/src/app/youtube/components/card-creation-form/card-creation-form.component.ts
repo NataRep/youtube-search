@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
+  FormArray,
   FormBuilder,
   FormGroup,
   ValidationErrors,
@@ -11,17 +12,15 @@ import {
 @Component({
   selector: 'app-card-creation-form',
   templateUrl: './card-creation-form.component.html',
-  styleUrl: './card-creation-form.component.scss',
+  styleUrls: ['./card-creation-form.component.scss'],
 })
 export class CardCreationFormComponent implements OnInit {
   form!: FormGroup;
-  currentDate!: Date;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.form = this.createForm();
-    this.currentDate = new Date();
   }
 
   private createForm(): FormGroup {
@@ -41,10 +40,39 @@ export class CardCreationFormComponent implements OnInit {
         '',
         Validators.compose([Validators.required, pastDateValidator()]),
       ],
+      tags: this.fb.array([this.createTag()]),
     });
   }
 
-  onSubmit() {}
+  private createTag(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+    });
+  }
+
+  get tags(): FormArray {
+    return this.form.get('tags') as FormArray;
+  }
+
+  addTag(): void {
+    if (this.tags.length < 5) {
+      this.tags.push(this.createTag());
+    }
+  }
+
+  removeTag(index: number): void {
+    if (this.tags.length > 1) {
+      this.tags.removeAt(index);
+    }
+  }
+
+  onSubmit(): void {
+    if (this.form.valid) {
+      console.log('Form submitted', this.form.value);
+    } else {
+      console.log('Form is invalid');
+    }
+  }
 }
 
 export function pastDateValidator(): ValidatorFn {
@@ -52,7 +80,9 @@ export function pastDateValidator(): ValidatorFn {
     control: AbstractControl
   ): { [key: string]: ValidationErrors } | null => {
     const dateValue = control.value;
-    const error: ValidationErrors = { pastDate: 'The date is invalid' };
+    const error: ValidationErrors = {
+      pastDate: 'The date must be in the past',
+    };
     if (dateValue && new Date(dateValue) > new Date()) {
       return error;
     }
