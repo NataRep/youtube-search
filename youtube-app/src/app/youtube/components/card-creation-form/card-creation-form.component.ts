@@ -73,6 +73,20 @@ export class CardCreationFormComponent implements OnInit {
       console.log('Form is invalid');
     }
   }
+  resetForm() {
+    this.form.reset();
+
+    //убираю из очищенной формы ошибки
+    this.form.markAsPristine();
+    this.form.markAsUntouched();
+
+    while (this.tags.length > 1) {
+      this.tags.removeAt(1);
+    }
+    if (this.tags.length === 0) {
+      this.tags.push(this.createTag());
+    }
+  }
 }
 
 export function pastDateValidator(): ValidatorFn {

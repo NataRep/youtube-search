@@ -76,14 +76,10 @@
       </button>
     </div>
   </div>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="addTag()"
-    [disabled]="tags.length >= 5"
-  >
+  <app-button (click)="addTag()" [disabled]="tags.length >= 5">
     Add tag
-  </button>
+  </app-button>
 
-  <button mat-raised-button color="primary" type="submit">Submit</button>
+  <app-button>Submit</app-button>
+  <app-button (click)="resetForm()">Reset</app-button>
 </form>
