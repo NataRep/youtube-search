@@ -19,6 +19,8 @@ import { SharedModule } from '../shared/shared.module';
 import { YouTubeRoutingModule } from './youtube-routing.module';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CardCreationFormComponent } from './components/card-creation-form/card-creation-form.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SearchSortToolsComponent,
     LoginButtonComponent,
     SafeUrlPipe,
+    CardCreationFormComponent,
+    AdminComponent,
   ],
   imports: [
     CommonModule,

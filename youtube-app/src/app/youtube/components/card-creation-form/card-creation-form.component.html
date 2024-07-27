@@ -1,0 +1,65 @@
+<h1>Create New Card</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" placeholder="Enter the title" />
+    <mat-error *ngIf="form.get('title')?.hasError('required')">
+      Please enter a title
+    </mat-error>
+    <mat-error *ngIf="form.get('title')?.hasError('minlength')">
+      The title is too short
+    </mat-error>
+    <mat-error *ngIf="form.get('title')?.hasError('maxlength')">
+      The title is too long
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      placeholder="Enter a description"
+      rows="3"
+    ></textarea>
+    <mat-error *ngIf="form.get('description')?.hasError('maxlength')">
+      The description is too long
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Image Link</mat-label>
+    <input matInput formControlName="imageLink" placeholder="Enter image URL" />
+    <mat-error *ngIf="form.get('imageLink')?.hasError('required')">
+      Please enter a link to the image
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Video Link</mat-label>
+    <input matInput formControlName="videoLink" placeholder="Enter video URL" />
+    <mat-error *ngIf="form.get('videoLink')?.hasError('required')">
+      Please enter a link to the video
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Creation Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      formControlName="creationDate"
+      placeholder="Choose a date"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="form.get('creationDate')?.hasError('required')">
+      Please enter a creation date
+    </mat-error>
+    <mat-error *ngIf="form.get('creationDate')?.hasError('pastDate')">
+      The date is invalid
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</form>
