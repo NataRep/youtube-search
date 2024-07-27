@@ -21,10 +21,30 @@
     height: 1.5rem;
     min-width: 1.5rem;
   }
+
+  .avatar {
+    button {
+      background: none;
+      box-shadow: none;
+      color: var(--blue-primary);
+      font-size: 1rem;
+    }
+    ::ng-deep .mat-mdc-unelevated-button > .mat-icon {
+      font-size: 1.75rem;
+      height: 1.75rem;
+      width: 1.75rem;
+    }
+  }
+  .login {
+    button {
+      background-color: var(--blue-primary);
+      box-shadow: 2px 0 4px var(--blue-secondary);
+    }
+  }
   mat-icon {
     margin: 0;
   }
-  .logout,
+  .avatar,
   .login {
     display: flex;
     align-items: center;

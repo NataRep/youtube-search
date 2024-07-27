@@ -44,6 +44,10 @@ export class LoginButtonComponent implements OnInit, OnDestroy {
     this.router.navigate(['/login']);
   }
 
+  goToAdmin() {
+    this.router.navigate(['/admin']);
+  }
+
   logout() {
     this.authService.logout();
     this.goToLogin();
