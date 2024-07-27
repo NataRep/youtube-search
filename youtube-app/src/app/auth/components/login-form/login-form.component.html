@@ -1,14 +1,13 @@
 <h1>Login</h1>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <mat-form-field appearance="fill">
-    <mat-label>Username</mat-label>
-    <input
-      matInput
-      formControlName="username"
-      placeholder="Enter your username"
-    />
-    <mat-error *ngIf="loginForm.get('username')!.hasError('required')">
+    <mat-label>Login</mat-label>
+    <input matInput formControlName="login" placeholder="Enter your email" />
+    <mat-error *ngIf="loginForm.get('login')!.hasError('required')">
       Please enter a login email
+    </mat-error>
+    <mat-error *ngIf="loginForm.get('login')!.hasError('email')">
+      The login email is invalid
     </mat-error>
   </mat-form-field>
 
@@ -19,12 +18,27 @@
       type="password"
       formControlName="password"
       placeholder="Enter your password"
+      [type]="hidePassword ? 'password' : 'text'"
     />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hidePassword = !hidePassword"
+      [attr.aria-label]="'Hide password'"
+    >
+      <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
     <mat-error *ngIf="loginForm.get('password')!.hasError('required')">
-      Password is required
+      Please enter a password
     </mat-error>
-    <mat-error *ngIf="loginForm.get('password')!.hasError('minlength')">
-      Password must be at least 6 characters long
+    <mat-error
+      *ngIf="
+        loginForm.get('password')!.hasError('minlength') ||
+        loginForm.get('password')!.hasError('pattern')
+      "
+    >
+      Your password isn't strong enough!<br />It must be 8+ characters, with
+      upper and lower case letters, numbers, and a special character.
     </mat-error>
   </mat-form-field>
   <app-button> Log In </app-button>

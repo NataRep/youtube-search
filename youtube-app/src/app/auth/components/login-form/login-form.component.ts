@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent {
   loginForm: FormGroup;
+  hidePassword: boolean = true;
 
   constructor(
     private authService: AuthService,
@@ -17,18 +18,24 @@ export class LoginFormComponent {
     private fb: FormBuilder
   ) {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
+      login: ['', Validators.compose([Validators.required, Validators.email])],
       password: [
         '',
-        Validators.compose([Validators.required, Validators.minLength(6)]),
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/(?=.*[a-zA-Zа-яА-Я])/), // проверка на заглавные и строчные буквы
+          Validators.pattern(/(?=.*\d)/), // проверка на цифры
+          Validators.pattern(/[!#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/), // проверка на символы
+        ]),
       ],
     });
   }
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      const username = this.loginForm.get('username')!.value;
-      this.authService.auth(username);
+      const login = this.loginForm.get('login')!.value;
+      this.authService.auth(login);
       this.router.navigate(['']);
     }
   }
