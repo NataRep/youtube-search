@@ -5,6 +5,10 @@
   background-color: #f2f2f2;
   border-radius: 0.5rem;
 
+  @media (max-width: 380px) {
+    padding: 2rem 1rem;
+  }
+
   h1 {
     font-size: 1.25rem;
     font-weight: 600;

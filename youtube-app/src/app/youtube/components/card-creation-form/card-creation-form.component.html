@@ -61,30 +61,38 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- Tags Sub-form -->
-  <div formArrayName="tags">
-    <div *ngFor="let tag of tags.controls; let i = index" [formGroupName]="i">
-      <mat-form-field appearance="fill">
-        <mat-label>Tag {{ i + 1 }}</mat-label>
-        <input matInput formControlName="name" placeholder="Enter a tag" />
-        <mat-error *ngIf="tag.get('name')?.hasError('required')">
-          Tag is required
-        </mat-error>
-      </mat-form-field>
-      <button
-        mat-icon-button
-        *ngIf="tags.length > 1"
-        (click)="removeTag(i)"
-        type="button"
-      >
-        <mat-icon>remove</mat-icon>
-      </button>
+  <div class="subform">
+    <!-- Tags Sub-form -->
+    <div formArrayName="tags">
+      <div *ngFor="let tag of tags.controls; let i = index" [formGroupName]="i">
+        <mat-form-field appearance="fill">
+          <mat-label>Tag {{ i + 1 }}</mat-label>
+          <input matInput formControlName="name" placeholder="Enter a tag" />
+          <mat-error *ngIf="tag.get('name')?.hasError('required')">
+            Tag is required
+          </mat-error>
+        </mat-form-field>
+        <button
+          mat-icon-button
+          *ngIf="tags.length > 1"
+          (click)="removeTag(i)"
+          type="button"
+        >
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
     </div>
-  </div>
-  <app-button (click)="addTag()" [disabled]="tags.length >= 5">
-    Add tag
-  </app-button>
 
-  <app-button type="submit">Submit</app-button>
-  <app-button (click)="resetForm()" type="reset">Reset</app-button>
+    <app-button
+      (click)="addTag()"
+      [disabled]="tags.length >= 5"
+      class="button_add"
+    >
+      Add tag +
+    </app-button>
+  </div>
+  <div class="button-group">
+    <app-button type="submit">Submit</app-button>
+    <app-button (click)="resetForm()" type="reset">Reset</app-button>
+  </div>
 </form>
