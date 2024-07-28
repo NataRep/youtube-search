@@ -28,7 +28,7 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <mat-label>Image Link</mat-label>
+    <mat-label>Image</mat-label>
     <input matInput formControlName="imageLink" placeholder="Enter image URL" />
     <mat-error *ngIf="form.get('imageLink')?.hasError('required')">
       Please enter a link to the image
@@ -36,7 +36,7 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <mat-label>Video Link</mat-label>
+    <mat-label>Link video</mat-label>
     <input matInput formControlName="videoLink" placeholder="Enter video URL" />
     <mat-error *ngIf="form.get('videoLink')?.hasError('required')">
       Please enter a link to the video
@@ -92,7 +92,7 @@
     </app-button>
   </div>
   <div class="button-group">
-    <app-button type="submit">Submit</app-button>
+    <app-button type="submit">Create card</app-button>
     <app-button (click)="resetForm()" type="reset">Reset</app-button>
   </div>
 </form>
