@@ -10,7 +10,6 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { shorteningInterceptor } from './core/interceptors/shortening.interceptor';
-import { authInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
