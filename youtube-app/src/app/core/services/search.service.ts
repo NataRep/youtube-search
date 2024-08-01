@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Item, Statistics } from '../models/search-item.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, mergeMap, switchMap, toArray } from 'rxjs/operators';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 @Injectable({
@@ -64,8 +64,10 @@ export class SearchService {
     query: string,
     maxResults: number = 12
   ): Observable<Item[]> {
+    console.log('111');
     return this.getFoundedVideos(query, maxResults).pipe(
       switchMap((videos) => {
+        console.log('222');
         if (!videos.length) {
           return of([]);
         }
@@ -92,7 +94,8 @@ export class SearchService {
             });
           })
         );
-      })
+      }),
+      shareReplay(1)
     );
   }
 

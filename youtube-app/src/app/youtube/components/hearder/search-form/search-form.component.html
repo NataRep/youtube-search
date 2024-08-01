@@ -1,6 +1,7 @@
 <form [formGroup]="searchForm" (ngSubmit)="onSubmitResults()">
   <input
     formControlName="query"
+    (input)="onQueryChange()"
     type="text"
     placeholder="What are you want to find out?"
   />
