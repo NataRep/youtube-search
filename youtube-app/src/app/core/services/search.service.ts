@@ -35,20 +35,24 @@ export class SearchService {
     }
   }
 
-  getVideoStatistics(videoId: string): Observable<Statistics> {
+  getVideosStatistics(
+    videosId: string[]
+  ): Observable<{ id: string; statistics: Statistics }[]> {
     const params = new HttpParams()
       .set('key', this.apiKey)
-      .set('id', videoId)
+      .set('id', videosId.join(','))
       .set('part', 'statistics');
     return this.http
-      .get<{ items: { statistics: Statistics }[] }>(`/videos`, {
+      .get<{ items: { id: string; statistics: Statistics }[] }>(`/videos`, {
         params,
       })
       .pipe(
         map((response) => {
           if (response.items && response.items.length > 0) {
-            this.queryAttempts = 0;
-            return response.items[0].statistics;
+            return response.items.map((item) => ({
+              id: item.id,
+              statistics: item.statistics,
+            }));
           } else {
             throw new Error('No statistics found');
           }
@@ -61,25 +65,34 @@ export class SearchService {
     maxResults: number = 12
   ): Observable<Item[]> {
     return this.getFoundedVideos(query, maxResults).pipe(
-      switchMap((videos) =>
-        videos.length
-          ? of(...videos).pipe(
-              mergeMap((video: Item) => {
-                // Проверяем, является ли id объектом и извлекаем videoId
-                const videoId =
-                  typeof video.id === 'string' ? video.id : video.id.videoId;
+      switchMap((videos) => {
+        if (!videos.length) {
+          return of([]);
+        }
 
-                return this.getVideoStatistics(videoId).pipe(
-                  map((stats) => ({
-                    ...video,
-                    statistics: stats,
-                  }))
-                );
-              }),
-              toArray()
-            )
-          : of([])
-      )
+        const videoIds = videos.map((video: Item) =>
+          typeof video.id === 'string' ? video.id : video.id.videoId
+        );
+
+        return this.getVideosStatistics(videoIds).pipe(
+          map((statsList) => {
+            // Создаем объект для быстрого поиска статистики по id
+            const statsMap = statsList.reduce((acc, stats) => {
+              acc[stats.id] = stats.statistics;
+              return acc;
+            }, {} as { [key: string]: Statistics });
+
+            return videos.map((video: Item) => {
+              const videoId =
+                typeof video.id === 'string' ? video.id : video.id.videoId;
+              return {
+                ...video,
+                statistics: statsMap[videoId] || {},
+              };
+            });
+          })
+        );
+      })
     );
   }
 
