@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Item } from '../../../core/models/search-item.model';
 import { SortService } from '../../../core/services/sort.service';
 import { SearchService } from '../../../core/services/search.service';
-import { Observable, of, Subscription } from 'rxjs';
+import { catchError, Observable, of, Subscription, tap } from 'rxjs';
 
 @Component({
   selector: 'app-search-results',
@@ -31,13 +31,20 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       }
     );
   }
+
   searchVideo(query: string): void {
     this.resetSearch();
-    this.finedVideos$ = this.searchService.getVideosWithStatistics(query);
-    this.finedVideos$.subscribe((videos) => {
-      this.isFoundFalse = videos.length < 1;
-      this.isEmptySearch = false;
-    });
+    this.finedVideos$ = this.searchService.getVideosWithStatistics(query).pipe(
+      tap((videos) => {
+        this.isFoundFalse = videos.length === 0;
+        this.isEmptySearch = false;
+      }),
+      catchError(() => {
+        this.isFoundFalse = true;
+        this.isEmptySearch = true;
+        return of([]);
+      })
+    );
   }
 
   resetSearch(): void {
