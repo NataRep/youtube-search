@@ -12,9 +12,11 @@ export const selectYoutubeVideos = createSelector(
 
 // Селектор для получения свойства isLoading из youtubeVideos
 export const selectIsLoading = createSelector(selectState, (state) => {
-  console.log('!!!');
-  console.log(state);
   return state.appState.videos.youtubeVideos.isLoading;
+});
+
+export const selectError = createSelector(selectState, (state) => {
+  return state.appState.videos.youtubeVideos.error;
 });
 
 /*

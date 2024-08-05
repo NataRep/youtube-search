@@ -39,5 +39,35 @@ export const reducers = createReducer(
         },
       },
     })
+  ),
+
+  on(
+    AppActions.getVideosSuccess,
+    (state, action): AppState => ({
+      ...state,
+      videos: {
+        ...state.videos,
+        youtubeVideos: {
+          items: action.videos,
+          isLoading: false,
+          error: null,
+        },
+      },
+    })
+  ),
+
+  on(
+    AppActions.getVideosFailure,
+    (state, action): AppState => ({
+      ...state,
+      videos: {
+        ...state.videos,
+        youtubeVideos: {
+          ...state.videos.youtubeVideos,
+          isLoading: false,
+          error: action.error,
+        },
+      },
+    })
   )
 );

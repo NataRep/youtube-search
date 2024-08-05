@@ -6,7 +6,7 @@ import { catchError, Observable, of, Subscription, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as AppAction from './../../../redux/actions';
 import { selectIsLoading } from '../../../redux/selectors';
-import { AppState, GlobalState } from '../../../redux/store.model';
+import { GlobalState } from '../../../redux/store.model';
 
 @Component({
   selector: 'app-search-results',
