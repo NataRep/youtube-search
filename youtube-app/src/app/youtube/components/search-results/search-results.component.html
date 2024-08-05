@@ -1,4 +1,5 @@
 <div class="container">
+  <ng-container *ngIf="isLoading$ | async">Loading...</ng-container>
   <ng-container *ngIf="finedVideos$ | async as finedVideos">
     <div *ngFor="let video of finedVideos | sortVideo">
       <app-video-item [item]="video"></app-video-item>

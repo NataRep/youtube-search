@@ -3,6 +3,10 @@ import { Item } from '../../../core/models/search-item.model';
 import { SortService } from '../../../core/services/sort.service';
 import { SearchService } from '../../../core/services/search.service';
 import { catchError, Observable, of, Subscription, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import * as AppAction from './../../../redux/actions';
+import { selectIsLoading } from '../../../redux/selectors';
+import { AppState } from '../../../redux/store.model';
 
 @Component({
   selector: 'app-search-results',
@@ -14,13 +18,17 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   isFoundFalse: boolean = true;
   isEmptySearch: boolean = true;
   private subscriptionSearchTerm!: Subscription;
+  isLoading$!: Observable<boolean>;
 
   constructor(
     private searchService: SearchService,
-    private sortService: SortService
+    private sortService: SortService,
+    // eslint-disable-next-line @ngrx/no-typed-global-store
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {
+    this.isLoading$ = this.store.select(selectIsLoading);
     this.subscriptionSearchTerm = this.sortService.searchTerm$.subscribe(
       (query) => {
         if (query.trim() !== '') {
@@ -34,6 +42,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   searchVideo(query: string): void {
     this.resetSearch();
+    this.store.dispatch(AppAction.getVideos());
     this.finedVideos$ = this.searchService.getVideosWithStatistics(query).pipe(
       tap((videos) => {
         this.isFoundFalse = videos.length === 0;

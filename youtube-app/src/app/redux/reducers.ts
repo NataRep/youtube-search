@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { AppState, Page, VideosState } from './store.model';
-import * as Actions from './actions';
+import * as AppActions from './actions';
 
 //начальное состояние Store приложения
 export const initialVideosState: VideosState = {
@@ -27,7 +27,7 @@ export const initialState: AppState = {
 export const reducers = createReducer(
   initialState,
   on(
-    Actions.getVideos,
+    AppActions.getVideos,
     (state): AppState => ({
       ...state,
       videos: {
