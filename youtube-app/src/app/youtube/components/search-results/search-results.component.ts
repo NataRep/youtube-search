@@ -2,10 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Item } from '../../../core/models/search-item.model';
 import { SortService } from '../../../core/services/sort.service';
 import { SearchService } from '../../../core/services/search.service';
-import { catchError, Observable, of, Subscription, tap } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as AppAction from './../../../redux/actions';
-import { selectIsLoading } from '../../../redux/selectors';
+import {
+  selectError,
+  selectIsLoading,
+  selectYoutubeVideos,
+} from '../../../redux/selectors';
 import { GlobalState } from '../../../redux/store.model';
 
 @Component({
@@ -18,7 +22,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   isFoundFalse: boolean = true;
   isEmptySearch: boolean = true;
   private subscriptionSearchTerm!: Subscription;
-  isLoading$!: Observable<boolean>;
+  //ngrx
+  isLoading$: Observable<boolean>;
+  videos$: Observable<Item[]>;
+  error$: Observable<string | null>;
 
   constructor(
     private searchService: SearchService,
@@ -27,40 +34,25 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     private store: Store<GlobalState>
   ) {
     this.isLoading$ = this.store.select(selectIsLoading);
+    this.error$ = this.store.select(selectError);
+    this.videos$ = this.store.select(selectYoutubeVideos);
   }
 
   ngOnInit() {
     this.subscriptionSearchTerm = this.sortService.searchTerm$.subscribe(
       (query) => {
         if (query.trim() !== '') {
+          this.isEmptySearch = false;
           this.searchVideo(query);
         } else {
-          this.resetSearch();
+          this.isEmptySearch = true;
         }
       }
     );
   }
 
   searchVideo(query: string): void {
-    this.resetSearch();
     this.store.dispatch(AppAction.getVideos({ query }));
-    this.finedVideos$ = this.searchService.getVideosWithStatistics(query).pipe(
-      tap((videos) => {
-        this.isFoundFalse = videos.length === 0;
-        this.isEmptySearch = false;
-      }),
-      catchError(() => {
-        this.isFoundFalse = true;
-        this.isEmptySearch = true;
-        return of([]);
-      })
-    );
-  }
-
-  resetSearch(): void {
-    this.finedVideos$ = of([]);
-    this.isEmptySearch = true;
-    this.isFoundFalse = false;
   }
 
   ngOnDestroy() {
