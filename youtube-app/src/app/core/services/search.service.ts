@@ -62,12 +62,10 @@ export class SearchService {
 
   getVideosWithStatistics(
     query: string,
-    maxResults: number = 12
+    maxResults: number = 20
   ): Observable<Item[]> {
-    console.log('111');
     return this.getFoundedVideos(query, maxResults).pipe(
       switchMap((videos) => {
-        console.log('222');
         if (!videos.length) {
           return of([]);
         }

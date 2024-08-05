@@ -43,7 +43,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   searchVideo(query: string): void {
     this.resetSearch();
-    this.store.dispatch(AppAction.getVideos());
+    this.store.dispatch(AppAction.getVideos({ query }));
     this.finedVideos$ = this.searchService.getVideosWithStatistics(query).pipe(
       tap((videos) => {
         this.isFoundFalse = videos.length === 0;

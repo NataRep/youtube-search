@@ -14,6 +14,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './redux/reducers';
+import { EffectsVideos } from './redux/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,7 @@ import { reducers } from './redux/reducers';
     AppRoutingModule,
     YoutubeModule,
     StoreModule.forRoot({ appState: reducers }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([EffectsVideos]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
