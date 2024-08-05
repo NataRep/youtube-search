@@ -1,24 +1,35 @@
 import { createSelector } from '@ngrx/store';
-import { AppState } from './store.model';
+import { GlobalState } from './store.model';
 
-export const selectAllVideos = (state: AppState) => state.videos;
+// Селектор для получения всего состояния videos
+export const selectState = (state: GlobalState) => state;
 
-export const selectIsLoading = createSelector(
-  selectAllVideos,
-  (state) => state.youtubeVideos.isLoading
-);
-
+// Селектор для получения youtubeVideos
 export const selectYoutubeVideos = createSelector(
-  selectAllVideos,
-  (state) => state.youtubeVideos.isLoading
+  selectState,
+  (state) => state.appState.videos.youtubeVideos.items
 );
 
+// Селектор для получения свойства isLoading из youtubeVideos
+export const selectIsLoading = createSelector(selectState, (state) => {
+  console.log('!!!');
+  console.log(state);
+  return state.appState.videos.youtubeVideos.isLoading;
+});
+
+/*
+// Селектор для получения customVideos
 export const selectCustomVideos = createSelector(
-  selectAllVideos,
-  (state) => state.customVideos
+  selectVideosState,
+  (videosState) => videosState.customVideos
 );
 
+// Селектор для получения favorites
 export const selectFavoritesVideos = createSelector(
-  selectAllVideos,
-  (state) => state.favorites
+  selectVideosState,
+  (videosState) => videosState.favorites
 );
+
+// Селектор для получения состояния page
+export const selectPageState = (state: AppState) => state.page;
+*/

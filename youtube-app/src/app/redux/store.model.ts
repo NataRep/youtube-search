@@ -1,5 +1,9 @@
 import { Item } from '../core/models/search-item.model';
 
+export interface GlobalState {
+  appState: AppState;
+}
+
 export interface AppState {
   videos: VideosState;
   page: Page;

@@ -6,7 +6,7 @@ import { catchError, Observable, of, Subscription, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as AppAction from './../../../redux/actions';
 import { selectIsLoading } from '../../../redux/selectors';
-import { AppState } from '../../../redux/store.model';
+import { AppState, GlobalState } from '../../../redux/store.model';
 
 @Component({
   selector: 'app-search-results',
@@ -24,11 +24,12 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     private searchService: SearchService,
     private sortService: SortService,
     // eslint-disable-next-line @ngrx/no-typed-global-store
-    private store: Store<AppState>
-  ) {}
+    private store: Store<GlobalState>
+  ) {
+    this.isLoading$ = this.store.select(selectIsLoading);
+  }
 
   ngOnInit() {
-    this.isLoading$ = this.store.select(selectIsLoading);
     this.subscriptionSearchTerm = this.sortService.searchTerm$.subscribe(
       (query) => {
         if (query.trim() !== '') {
