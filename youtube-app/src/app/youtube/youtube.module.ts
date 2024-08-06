@@ -21,6 +21,7 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CardCreationFormComponent } from './components/card-creation-form/card-creation-form.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { FavoriteIconComponent } from './components/favorite-icon/favorite-icon.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AdminComponent } from './pages/admin/admin.component';
     SafeUrlPipe,
     CardCreationFormComponent,
     AdminComponent,
+    FavoriteIconComponent,
   ],
   imports: [
     CommonModule,

@@ -13,7 +13,7 @@ img {
   align-items: center;
   width: 14rem;
   background-color: #e5e5e5;
-  padding: 1.25rem;
+  padding: 0.5rem 1.25rem 1.25rem 1.25rem;
   position: relative;
   border-radius: 0.5rem;
   overflow: hidden;
@@ -61,5 +61,11 @@ img {
 
   &.newer-than-seven-days .underline {
     background-color: #2f80ed;
+  }
+
+  app-favorite-icon {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
   }
 }

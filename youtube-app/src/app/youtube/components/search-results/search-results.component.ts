@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Item } from '../../../core/models/search-item.model';
 import { SortService } from '../../../core/services/sort.service';
 import { SearchService } from '../../../core/services/search.service';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as AppAction from './../../../redux/actions';
 import {
@@ -28,7 +28,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   error$: Observable<string | null>;
 
   constructor(
-    private searchService: SearchService,
     private sortService: SortService,
     // eslint-disable-next-line @ngrx/no-typed-global-store
     private store: Store<GlobalState>

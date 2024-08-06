@@ -18,13 +18,16 @@
     </div>
     <div class="info">
       <div class="text">
+        <app-favorite-icon [item]="video"></app-favorite-icon>
         <div class="header-row">
-          <h1>{{ video?.snippet?.title }}</h1>
+          <h1>
+            {{ video?.snippet?.title }}
+          </h1>
           <div class="data">
             {{ video?.snippet?.publishedAt | date : "fullDate" }}
           </div>
         </div>
-        <div class="desc">
+        <div class="desc" *ngIf="video.snippet.description">
           <h2>Description:</h2>
           <p>{{ video?.snippet?.description }}</p>
         </div>

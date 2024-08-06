@@ -101,6 +101,12 @@
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
     overflow-wrap: break-word;
+    position: relative;
+  }
+  app-favorite-icon {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
   }
   .statistics {
     width: 100%;

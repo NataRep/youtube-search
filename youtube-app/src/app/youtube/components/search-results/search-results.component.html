@@ -1,5 +1,7 @@
 <div class="container">
-  <ng-container *ngIf="isLoading$ | async">Loading...</ng-container>
+  <ng-container *ngIf="isLoading$ | async"
+    ><p class="loading-msg">Loading...</p></ng-container
+  >
   <ng-container *ngIf="error$ | async"
     >Sorry, something went wrong, try again later</ng-container
   >
