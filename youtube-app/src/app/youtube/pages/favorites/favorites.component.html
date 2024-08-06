@@ -1,1 +1,10 @@
-<p>favorites works!</p>
+<div class="container">
+  <ng-container *ngIf="isEmpty">
+    <p>You haven't added a video to your favorites yet...</p>
+  </ng-container>
+  <ng-container *ngIf="videos$ | async as videos">
+    <div *ngFor="let video of videos; trackBy: trackById">
+      <app-video-item [item]="video"></app-video-item>
+    </div>
+  </ng-container>
+</div>

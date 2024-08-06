@@ -45,12 +45,10 @@ export class FavoriteIconComponent implements OnInit {
   }
 
   addToFavorite() {
-    console.log('add:', this.item);
     this.store.dispatch(AppAction.addVideosToFavorites({ video: this.item }));
   }
 
   removeFromFavorite() {
-    console.log('remove:', this.item);
     this.store.dispatch(
       AppAction.removeVideosFromFavorites({ video: this.item })
     );
@@ -58,7 +56,6 @@ export class FavoriteIconComponent implements OnInit {
 
   onClick() {
     this.isFavorite$.pipe(take(1)).subscribe((isFavorite) => {
-      console.log('click!');
       if (isFavorite) {
         this.removeFromFavorite();
       } else {
