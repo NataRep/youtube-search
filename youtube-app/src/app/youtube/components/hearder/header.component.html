@@ -9,5 +9,14 @@
     </div>
     <app-search-sort-tools *ngIf="isSearchToolsVisible"></app-search-sort-tools>
   </div>
-  <app-login-button></app-login-button>
+  <div class="admin-block">
+    <app-login-button></app-login-button>
+
+    <mat-icon
+      (click)="goToFavorites()"
+      class="favorite-icon"
+      title="Watch a list of favorite videos"
+      >favorite</mat-icon
+    >
+  </div>
 </div>
