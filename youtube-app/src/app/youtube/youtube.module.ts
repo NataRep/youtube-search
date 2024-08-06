@@ -22,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CardCreationFormComponent } from './components/card-creation-form/card-creation-form.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { FavoriteIconComponent } from './components/favorite-icon/favorite-icon.component';
+import { FavoritesComponent } from './pages/favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { FavoriteIconComponent } from './components/favorite-icon/favorite-icon.
     CardCreationFormComponent,
     AdminComponent,
     FavoriteIconComponent,
+    FavoritesComponent,
   ],
   imports: [
     CommonModule,
