@@ -22,7 +22,22 @@ export class FavoriteIconComponent implements OnInit {
     this.isFavorite$ = this.store.select(selectFavoritesVideos).pipe(
       map((favorites) => {
         return favorites.some((video) => {
-          console.log('проверка является ли видео избранным');
+          if (
+            typeof this.item.id !== 'string' &&
+            typeof video.id === 'string'
+          ) {
+            return video.id === this.item.id.videoId;
+          } else if (
+            typeof this.item.id !== 'string' &&
+            typeof video.id !== 'string'
+          ) {
+            return video.id.videoId === this.item.id.videoId;
+          } else if (
+            typeof this.item.id == 'string' &&
+            typeof video.id !== 'string'
+          ) {
+            return video.id.videoId === this.item.id;
+          }
           return video.id === this.item.id;
         });
       })
@@ -43,6 +58,7 @@ export class FavoriteIconComponent implements OnInit {
 
   onClick() {
     this.isFavorite$.pipe(take(1)).subscribe((isFavorite) => {
+      console.log('click!');
       if (isFavorite) {
         this.removeFromFavorite();
       } else {
