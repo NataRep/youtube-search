@@ -52,6 +52,10 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.store.dispatch(AppAction.getVideos({ query }));
   }
 
+  trackById(index: number, item: Item): string {
+    return typeof item.id === 'string' ? item.id : item.id.videoId;
+  }
+
   ngOnDestroy() {
     this.subscriptionSearchTerm.unsubscribe();
   }

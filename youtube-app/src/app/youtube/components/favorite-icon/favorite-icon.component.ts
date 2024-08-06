@@ -19,11 +19,23 @@ export class FavoriteIconComponent implements OnInit {
   constructor(private store: Store<GlobalState>) {}
 
   ngOnInit(): void {
-    this.isFavorite$ = this.store
-      .select(selectFavoritesVideos)
-      .pipe(
-        map((favorites) => favorites.some((video) => video.id === this.item.id))
-      );
+    this.isFavorite$ = this.store.select(selectFavoritesVideos).pipe(
+      map((favorites) => {
+        console.log('Favorites array:', favorites);
+        console.log('Item ID:', this.item.id);
+        console.log(
+          'IsFavorites:',
+          favorites.some((video) => {
+            console.log('check works');
+            return video.id === this.item.id;
+          })
+        );
+        return favorites.some((video) => {
+          console.log('check works');
+          return video.id === this.item.id;
+        });
+      })
+    );
   }
 
   addToFavorite() {

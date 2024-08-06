@@ -9,7 +9,7 @@
     <p>Write what you want to see!</p>
   </ng-container>
   <ng-container *ngIf="videos$ | async as finedVideos">
-    <div *ngFor="let video of finedVideos | sortVideo">
+    <div *ngFor="let video of finedVideos | sortVideo; trackBy: trackById">
       <app-video-item [item]="video"></app-video-item>
     </div>
     <ng-container
