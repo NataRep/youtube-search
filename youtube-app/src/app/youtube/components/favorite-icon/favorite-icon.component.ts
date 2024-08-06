@@ -21,17 +21,8 @@ export class FavoriteIconComponent implements OnInit {
   ngOnInit(): void {
     this.isFavorite$ = this.store.select(selectFavoritesVideos).pipe(
       map((favorites) => {
-        console.log('Favorites array:', favorites);
-        console.log('Item ID:', this.item.id);
-        console.log(
-          'IsFavorites:',
-          favorites.some((video) => {
-            console.log('check works');
-            return video.id === this.item.id;
-          })
-        );
         return favorites.some((video) => {
-          console.log('check works');
+          console.log('проверка является ли видео избранным');
           return video.id === this.item.id;
         });
       })
