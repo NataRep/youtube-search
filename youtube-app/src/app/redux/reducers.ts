@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { AppState, Page, VideosState } from './store.model';
 import * as AppActions from './actions';
 
-//начальное состояние Store приложения
+// Начальное состояние Store приложения
 export const initialVideosState: VideosState = {
   customVideos: [],
   youtubeVideos: {
@@ -48,6 +48,7 @@ export const reducers = createReducer(
       videos: {
         ...state.videos,
         youtubeVideos: {
+          ...state.videos.youtubeVideos,
           items: action.videos,
           isLoading: false,
           error: null,
@@ -69,5 +70,30 @@ export const reducers = createReducer(
         },
       },
     })
-  )
+  ),
+
+  on(AppActions.addVideosToFavorites, (state, action): AppState => {
+    const newFavorites = [...state.videos.favorites, action.video];
+
+    return {
+      ...state,
+      videos: {
+        ...state.videos,
+        favorites: newFavorites,
+      },
+    };
+  }),
+
+  on(AppActions.removeVideosFromFavorites, (state, action): AppState => {
+    const newFavorites = state.videos.favorites.filter(
+      (item) => item.id !== action.video.id
+    );
+    return {
+      ...state,
+      videos: {
+        ...state.videos,
+        favorites: newFavorites,
+      },
+    };
+  })
 );

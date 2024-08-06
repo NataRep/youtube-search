@@ -19,6 +19,12 @@ export const selectError = createSelector(selectState, (state) => {
   return state.appState.videos.youtubeVideos.error;
 });
 
+// Селектор для получения favorites
+export const selectFavoritesVideos = createSelector(
+  selectState,
+  (state) => state.appState.videos.favorites
+);
+
 /*
 // Селектор для получения customVideos
 export const selectCustomVideos = createSelector(
@@ -26,11 +32,7 @@ export const selectCustomVideos = createSelector(
   (videosState) => videosState.customVideos
 );
 
-// Селектор для получения favorites
-export const selectFavoritesVideos = createSelector(
-  selectVideosState,
-  (videosState) => videosState.favorites
-);
+
 
 // Селектор для получения состояния page
 export const selectPageState = (state: AppState) => state.page;

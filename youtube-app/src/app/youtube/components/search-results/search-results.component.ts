@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Item } from '../../../core/models/search-item.model';
 import { SortService } from '../../../core/services/sort.service';
-import { SearchService } from '../../../core/services/search.service';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as AppAction from './../../../redux/actions';
@@ -18,7 +17,6 @@ import { GlobalState } from '../../../redux/store.model';
   styleUrl: './search-results.component.scss',
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
-  finedVideos$!: Observable<Item[]>;
   isFoundFalse: boolean = true;
   isEmptySearch: boolean = true;
   private subscriptionSearchTerm!: Subscription;

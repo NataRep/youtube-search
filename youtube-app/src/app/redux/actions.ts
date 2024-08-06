@@ -15,3 +15,13 @@ export const getVideosFailure = createAction(
   '[Videos] Get Videos failure',
   props<{ error: string }>()
 );
+
+export const addVideosToFavorites = createAction(
+  '[Favorites] Add Video to Favorites',
+  props<{ video: Item }>()
+);
+
+export const removeVideosFromFavorites = createAction(
+  '[Favorites] Remove Video from Favorites',
+  props<{ video: Item }>()
+);
