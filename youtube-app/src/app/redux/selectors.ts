@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { GlobalState } from './store.model';
+import { CardCreationFormComponent } from '../youtube/components/card-creation-form/card-creation-form.component';
 
 // Селектор для получения всего состояния videos
 export const selectState = (state: GlobalState) => state;
@@ -25,15 +26,21 @@ export const selectFavoritesVideos = createSelector(
   (state) => state.appState.videos.favorites
 );
 
-/*
 // Селектор для получения customVideos
 export const selectCustomVideos = createSelector(
-  selectVideosState,
-  (videosState) => videosState.customVideos
+  selectState,
+  (state) => state.appState.videos.customVideos
 );
 
+export const selectCustomAndYoutubeVideo = createSelector(
+  selectState,
+  (state) => [
+    ...state.appState.videos.customVideos,
+    ...state.appState.videos.youtubeVideos.items,
+  ]
+);
 
-
+/*
 // Селектор для получения состояния page
 export const selectPageState = (state: AppState) => state.page;
 */

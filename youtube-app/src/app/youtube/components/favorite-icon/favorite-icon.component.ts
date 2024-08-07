@@ -44,6 +44,10 @@ export class FavoriteIconComponent implements OnInit {
     );
   }
 
+  isCustom(): boolean {
+    return this.item.kind === 'custom-video';
+  }
+
   addToFavorite() {
     this.store.dispatch(AppAction.addVideosToFavorites({ video: this.item }));
   }

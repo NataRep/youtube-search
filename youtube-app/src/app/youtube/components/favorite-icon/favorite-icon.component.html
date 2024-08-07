@@ -1,13 +1,13 @@
 <div class="favorite">
   <mat-icon
-    *ngIf="isFavorite$ | async"
+    *ngIf="!isCustom() && (isFavorite$ | async)"
     (click)="onClick()"
     class="favorite-icon"
     title="Remove from favorites"
     >favorite</mat-icon
   >
   <mat-icon
-    *ngIf="(isFavorite$ | async) === false"
+    *ngIf="!isCustom() && (isFavorite$ | async) === false"
     (click)="onClick()"
     class="unfavorite-icon"
     title="Add to favorites"
