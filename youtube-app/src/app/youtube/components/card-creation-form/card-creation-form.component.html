@@ -33,6 +33,9 @@
     <mat-error *ngIf="form.get('imageLink')?.hasError('required')">
       Please enter a link to the image
     </mat-error>
+    <mat-error *ngIf="form.get('imageLink')?.hasError('invalidImageUrl')">
+      The URL is not a valid image link
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
@@ -40,6 +43,9 @@
     <input matInput formControlName="videoLink" placeholder="Enter video URL" />
     <mat-error *ngIf="form.get('videoLink')?.hasError('required')">
       Please enter a link to the video
+    </mat-error>
+    <mat-error *ngIf="form.get('videoLink')?.hasError('invalidVideoUrl')">
+      The URL is not a valid video link
     </mat-error>
   </mat-form-field>
 
@@ -57,7 +63,7 @@
       Please enter a creation date
     </mat-error>
     <mat-error *ngIf="form.get('creationDate')?.hasError('pastDate')">
-      The date is invalid
+      The date must be in the past
     </mat-error>
   </mat-form-field>
 

@@ -1,6 +1,6 @@
 export interface Item {
   kind: string;
-  etag: string;
+  etag?: string;
   id: { kind: string; videoId: string } | string;
   snippet: Snippet;
   statistics: Statistics;
@@ -13,12 +13,13 @@ interface Snippet {
   description: string;
   thumbnails: Thumbnails;
   channelTitle?: string;
-  tags?: string[];
+  tags: string[];
   categoryId?: string;
   liveBroadcastContent?: string;
   defaultLanguage?: string;
   localized?: Localized;
   defaultAudioLanguage?: string;
+  videoLink?: string;
 }
 
 interface Thumbnails {
@@ -43,7 +44,7 @@ interface Localized {
 export interface Statistics {
   viewCount: string;
   likeCount: string;
-  dislikeCount: string;
+  dislikeCount?: string;
   favoriteCount: string;
   commentCount: string;
 }

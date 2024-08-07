@@ -35,8 +35,14 @@ export class CardCreationFormComponent implements OnInit {
         ]),
       ],
       description: ['', Validators.maxLength(255)],
-      imageLink: ['', Validators.required],
-      videoLink: ['', Validators.required],
+      imageLink: [
+        '',
+        Validators.compose([Validators.required, imageUrlValidator()]),
+      ],
+      videoLink: [
+        '',
+        Validators.compose([Validators.required, videoUrlValidator()]),
+      ],
       creationDate: [
         '',
         Validators.compose([Validators.required, pastDateValidator()]),
@@ -69,7 +75,34 @@ export class CardCreationFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      console.log('Form submitted', this.form.value);
+      const tags = this.form.value.tags.map(
+        (item: { name: string }) => item.name
+      );
+      const customVideo: Item = {
+        kind: 'custom-video',
+        id: generateRandomId(),
+        snippet: {
+          publishedAt: new Date(this.form.value.creationDate).toISOString(),
+          title: this.form.value.title,
+          description: this.form.value.description,
+          thumbnails: {
+            medium: {
+              url: this.form.value.imageLink,
+              width: 320,
+              height: 180,
+            },
+          },
+          tags: tags,
+          videoLink: this.form.value.videoLink,
+        },
+        statistics: {
+          viewCount: '0',
+          likeCount: '0',
+          favoriteCount: '0',
+          commentCount: '0',
+        },
+      };
+      console.log('Form submitted', customVideo);
     } else {
       console.log('Form is invalid');
     }
@@ -104,4 +137,40 @@ export function pastDateValidator(): ValidatorFn {
     }
     return null;
   };
+}
+
+// валидация ссылки на изображение
+export function imageUrlValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const url = control.value;
+    const regex = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|webp|svg))$/i;
+    const valid = regex.test(url);
+    return valid
+      ? null
+      : { invalidImageUrl: 'The URL is not a valid image link' };
+  };
+}
+
+// валидация ссылки на видео
+export function videoUrlValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const url = control.value;
+    const regex = /^(https?:\/\/.*\.(?:mp4|mov|avi|wmv|flv|mkv|webm))$/i;
+    const valid = regex.test(url);
+    return valid
+      ? null
+      : { invalidVideoUrl: 'The URL is not a valid video link' };
+  };
+}
+
+//генерируем рандомный id длинной 11 символов
+function generateRandomId(length: number = 11): string {
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 }
