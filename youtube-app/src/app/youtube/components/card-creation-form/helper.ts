@@ -29,14 +29,13 @@ export function imageUrlValidator(): ValidatorFn {
 }
 
 // валидация ссылки на видео
-export function videoUrlValidator(): ValidatorFn {
+export function urlValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const url = control.value;
-    const regex = /^(https?:\/\/.*\.(?:mp4|mov|avi|wmv|flv|mkv|webm))$/i;
-    const valid = regex.test(url);
-    return valid
-      ? null
-      : { invalidVideoUrl: 'The URL is not a valid video link' };
+    // Регулярное выражение для проверки начала URL с http:// или https://
+    const protocolPattern = /^(https?:\/\/)/i;
+    const isValid = protocolPattern.test(url);
+    return isValid ? null : { invalidUrl: 'The URL is not valid' };
   };
 }
 
