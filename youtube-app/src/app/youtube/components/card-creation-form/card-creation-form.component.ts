@@ -18,6 +18,7 @@ import * as AppAction from './../../../redux/actions';
 })
 export class CardCreationFormComponent implements OnInit {
   form!: FormGroup;
+  showMessage: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -108,6 +109,9 @@ export class CardCreationFormComponent implements OnInit {
         },
       };
       this.store.dispatch(AppAction.addCustomVideo({ video: customVideo }));
+      this.showMessage = true;
+      console.log(this.showMessage);
+      setTimeout(() => (this.showMessage = false), 5000);
       this.resetForm();
     }
   }

@@ -56,4 +56,28 @@
     justify-content: space-between;
     gap: 2rem;
   }
+  .created-msg {
+    opacity: 0;
+    background: var(--green-secondary);
+    padding: 1rem;
+    z-index: 2;
+    font-size: 1rem;
+    border-left: 4px solid var(--green-primary);
+    animation: fadeInOut 5s ease-in-out forwards;
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

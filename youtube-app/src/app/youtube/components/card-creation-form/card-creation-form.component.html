@@ -101,4 +101,8 @@
     <app-button type="submit">Create card</app-button>
     <app-button (click)="resetForm()" type="reset">Reset</app-button>
   </div>
+
+  <div class="created-msg" *ngIf="showMessage">
+    Your video has been created!
+  </div>
 </form>
