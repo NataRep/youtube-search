@@ -5,7 +5,6 @@ import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as AppAction from './../../../redux/actions';
 import {
-  selectCustomAndYoutubeVideo,
   selectError,
   selectIsLoading,
   selectYoutubeVideos,
@@ -33,7 +32,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   ) {
     this.isLoading$ = this.store.select(selectIsLoading);
     this.error$ = this.store.select(selectError);
-    this.videos$ = this.store.select(selectCustomAndYoutubeVideo);
+    this.videos$ = this.store.select(selectYoutubeVideos);
   }
 
   ngOnInit() {
