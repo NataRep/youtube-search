@@ -66,7 +66,7 @@
       background-color: #2f80ed;
     }
   }
-  .video {
+  .video-container {
     @media (max-width: 1200px) {
       position: relative;
       width: 100%;
@@ -75,7 +75,7 @@
       overflow: hidden;
       max-width: 100%;
       background: #000;
-      iframe {
+      .video {
         position: absolute;
         top: 0;
         left: 0;
@@ -103,7 +103,8 @@
     overflow-wrap: break-word;
     position: relative;
   }
-  app-favorite-icon {
+  app-favorite-icon,
+  app-remove-custom-button {
     position: absolute;
     right: 1rem;
     top: 1rem;

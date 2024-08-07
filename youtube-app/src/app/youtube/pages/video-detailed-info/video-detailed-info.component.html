@@ -4,7 +4,7 @@
 
 <ng-container *ngIf="video$ | async as video; else loading">
   <div [appCustomClass]="video?.snippet?.publishedAt" class="video-card">
-    <div class="video">
+    <div class="video-container">
       <iframe
         [src]="videoURL | safeUrl"
         width="640"
@@ -12,13 +12,32 @@
         frameborder="0"
         frameborder="0"
         allowfullscreen
+        *ngIf="!isCustomVideo"
+        class="video"
       >
         ></iframe
       >
+      <video
+        width="640"
+        height="360"
+        controls
+        *ngIf="isCustomVideo"
+        class="video"
+      >
+        <source [src]="videoURL" *ngIf="videoType === 'mp4'" type="video/mp4" />
+        <source
+          [src]="videoURL"
+          *ngIf="videoType === 'webm'"
+          type="video/webm"
+        />
+        <source [src]="videoURL" *ngIf="videoType === 'ogg'" type="video/ogg" />
+        Your browser does not support the video tag.
+      </video>
     </div>
     <div class="info">
       <div class="text">
         <app-favorite-icon [item]="video"></app-favorite-icon>
+        <app-remove-custom-button [item]="video"></app-remove-custom-button>
         <div class="header-row">
           <h1>
             {{ video?.snippet?.title }}

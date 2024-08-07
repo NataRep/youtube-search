@@ -5,7 +5,7 @@ import {
   generateRandomId,
   imageUrlValidator,
   pastDateValidator,
-  urlValidator,
+  videoUrlValidator,
 } from './helper';
 import { Store } from '@ngrx/store';
 import { GlobalState } from '../../../redux/store.model';
@@ -46,7 +46,7 @@ export class CardCreationFormComponent implements OnInit {
       ],
       videoLink: [
         '',
-        Validators.compose([Validators.required, urlValidator()]),
+        Validators.compose([Validators.required, videoUrlValidator()]),
       ],
       creationDate: [
         '',
