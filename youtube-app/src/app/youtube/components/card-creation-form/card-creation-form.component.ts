@@ -8,6 +8,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Item } from '../../../core/models/search-item.model';
 
 @Component({
   selector: 'app-card-creation-form',
@@ -73,6 +74,7 @@ export class CardCreationFormComponent implements OnInit {
       console.log('Form is invalid');
     }
   }
+
   resetForm() {
     this.form.reset();
 

@@ -8,25 +8,25 @@ export interface Item {
 
 interface Snippet {
   publishedAt: string;
-  channelId: string;
+  channelId?: string;
   title: string;
   description: string;
   thumbnails: Thumbnails;
-  channelTitle: string;
-  tags: string[];
-  categoryId: string;
-  liveBroadcastContent: string;
+  channelTitle?: string;
+  tags?: string[];
+  categoryId?: string;
+  liveBroadcastContent?: string;
   defaultLanguage?: string;
-  localized: Localized;
-  defaultAudioLanguage: string;
+  localized?: Localized;
+  defaultAudioLanguage?: string;
 }
 
 interface Thumbnails {
-  default: Thumbnail;
+  default?: Thumbnail;
   medium: Thumbnail;
-  high: Thumbnail;
-  standard: Thumbnail;
-  maxres: Thumbnail;
+  high?: Thumbnail;
+  standard?: Thumbnail;
+  maxres?: Thumbnail;
 }
 
 interface Thumbnail {
