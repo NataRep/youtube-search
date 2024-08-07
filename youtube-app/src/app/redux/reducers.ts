@@ -95,5 +95,30 @@ export const reducers = createReducer(
         favorites: newFavorites,
       },
     };
+  }),
+
+  on(AppActions.addCustomVideo, (state, action): AppState => {
+    const newCustoms = [...state.videos.customVideos, action.video];
+
+    return {
+      ...state,
+      videos: {
+        ...state.videos,
+        customVideos: newCustoms,
+      },
+    };
+  }),
+
+  on(AppActions.removeCustomVideo, (state, action): AppState => {
+    const newCustoms = state.videos.customVideos.filter(
+      (item) => item.id !== action.video.id
+    );
+    return {
+      ...state,
+      videos: {
+        ...state.videos,
+        customVideos: newCustoms,
+      },
+    };
   })
 );

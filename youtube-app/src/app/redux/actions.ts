@@ -25,3 +25,13 @@ export const removeVideosFromFavorites = createAction(
   '[Favorites] Remove Video from Favorites',
   props<{ video: Item }>()
 );
+
+export const addCustomVideo = createAction(
+  '[Custom Video] Add custom video',
+  props<{ video: Item }>()
+);
+
+export const removeCustomVideo = createAction(
+  '[Custom Video] Remove custom video',
+  props<{ video: Item }>()
+);

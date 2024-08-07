@@ -7,6 +7,9 @@ import {
   pastDateValidator,
   videoUrlValidator,
 } from './helper';
+import { Store } from '@ngrx/store';
+import { GlobalState } from '../../../redux/store.model';
+import * as AppAction from './../../../redux/actions';
 
 @Component({
   selector: 'app-card-creation-form',
@@ -16,7 +19,11 @@ import {
 export class CardCreationFormComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    // eslint-disable-next-line @ngrx/no-typed-global-store
+    private store: Store<GlobalState>
+  ) {}
 
   ngOnInit() {
     this.form = this.createForm();
@@ -101,6 +108,7 @@ export class CardCreationFormComponent implements OnInit {
         },
       };
       console.log('Form submitted', customVideo);
+      this.store.dispatch(AppAction.addCustomVideo({ video: customVideo }));
     } else {
       console.log('Form is invalid');
     }
