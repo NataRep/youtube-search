@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Item } from '../../../core/models/search-item.model';
 import { Store } from '@ngrx/store';
 import { GlobalState } from '../../../redux/store.model';
