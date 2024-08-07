@@ -1,5 +1,6 @@
 <div class="item-card" [appCustomClass]="getItemPublishedDate()">
   <app-favorite-icon [item]="item"></app-favorite-icon>
+  <app-remove-custom-button [item]="item"></app-remove-custom-button>
   <img [src]="item.snippet.thumbnails.medium.url" alt="" />
   <app-social-info
     [statistics]="item.statistics"

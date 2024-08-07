@@ -23,6 +23,7 @@ import { CardCreationFormComponent } from './components/card-creation-form/card-
 import { AdminComponent } from './pages/admin/admin.component';
 import { FavoriteIconComponent } from './components/favorite-icon/favorite-icon.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
+import { RemoveCustomButtonComponent } from './components/remove-custom-button/remove-custom-button.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { FavoritesComponent } from './pages/favorites/favorites.component';
     AdminComponent,
     FavoriteIconComponent,
     FavoritesComponent,
+    RemoveCustomButtonComponent,
   ],
   imports: [
     CommonModule,
