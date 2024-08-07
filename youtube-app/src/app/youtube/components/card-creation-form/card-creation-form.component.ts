@@ -107,25 +107,46 @@ export class CardCreationFormComponent implements OnInit {
           commentCount: '0',
         },
       };
-      console.log('Form submitted', customVideo);
       this.store.dispatch(AppAction.addCustomVideo({ video: customVideo }));
-    } else {
-      console.log('Form is invalid');
+      this.resetForm();
     }
   }
 
   resetForm() {
-    this.form.reset();
+    // Сброс значений формы
+    this.form.reset({
+      title: '',
+      description: '',
+      imageLink: '',
+      videoLink: '',
+      creationDate: '',
+      tags: [],
+    });
 
-    //убираю из очищенной формы ошибки
+    //  все поля формы отмечены как "чистые" и "не тронутые"
     this.form.markAsPristine();
     this.form.markAsUntouched();
 
-    while (this.tags.length > 1) {
-      this.tags.removeAt(1);
+    // Сброс FormArray
+    const tags = this.form.get('tags') as FormArray;
+    while (tags.length > 1) {
+      tags.removeAt(1);
     }
-    if (this.tags.length === 0) {
-      this.tags.push(this.createTag());
+    if (tags.length === 0) {
+      tags.push(this.createTag());
     }
+
+    // Сброс ошибок валидации
+    tags.controls.forEach((tag) => {
+      tag.setErrors(null);
+    });
+
+    // Сбрасываем ошибки валидации
+    Object.keys(this.form.controls).forEach((key) => {
+      const control = this.form.get(key);
+      if (control) {
+        control.setErrors(null);
+      }
+    });
   }
 }
