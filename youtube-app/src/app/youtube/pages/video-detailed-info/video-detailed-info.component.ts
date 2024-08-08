@@ -108,6 +108,7 @@ export class VideoDetailedInfoComponent implements OnInit, OnDestroy {
           const videoId =
             typeof video.id === 'string' ? video.id : video.id.videoId;
           this.videoURL = `https://www.youtube.com/embed/${videoId}`;
+          this.video$ = of(video);
         }
       });
 
