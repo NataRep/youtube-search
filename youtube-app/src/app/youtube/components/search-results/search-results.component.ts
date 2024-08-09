@@ -21,19 +21,15 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   isEmptySearch: boolean = true;
   private subscriptionSearchTerm!: Subscription;
   //ngrx
-  isLoading$: Observable<boolean>;
-  videos$: Observable<Item[]>;
-  error$: Observable<string | null>;
+  isLoading$: Observable<boolean> = this.store.select(selectIsLoading);
+  videos$: Observable<Item[]> = this.store.select(selectYoutubeVideos);
+  error$: Observable<string | null> = this.store.select(selectError);
 
   constructor(
     private sortService: SortService,
     // eslint-disable-next-line @ngrx/no-typed-global-store
     private store: Store<GlobalState>
-  ) {
-    this.isLoading$ = this.store.select(selectIsLoading);
-    this.error$ = this.store.select(selectError);
-    this.videos$ = this.store.select(selectYoutubeVideos);
-  }
+  ) {}
 
   ngOnInit() {
     this.subscriptionSearchTerm = this.sortService.searchTerm$.subscribe(

@@ -67,29 +67,30 @@ export class VideoDetailedInfoComponent implements OnInit, OnDestroy {
       )
       .subscribe((video) => {
         if (video) {
-          // Видео найдено в стейте
-          this.videoURL = video.snippet.videoLink
-            ? video.snippet.videoLink
-            : '';
-          this.detectVideoType(this.videoURL);
-          this.isCustomVideo = true;
-          this.video$ = of(video);
+          this.handleCustomVideoFound(video);
         } else {
-          if (this.isCustomVideo) {
-            // видео было кастомным, но его удалили находясь на странице
-            // перенаправляю на главную
-            this.router.navigate(['/']);
-            this.unsubscribe$.next();
-            return;
-          }
-
-          this.isCustomVideo = false;
-          // Видео не найдено, отправляем запрос на сервер
-          this.loadVideoFromServer();
+          this.handleCustomVideoNotFound();
         }
       });
 
     this.subscriptions.add(sub);
+  }
+
+  private handleCustomVideoFound(video: Item): void {
+    this.videoURL = video.snippet.videoLink || '';
+    this.detectVideoType(this.videoURL);
+    this.isCustomVideo = true;
+    this.video$ = of(video);
+  }
+
+  private handleCustomVideoNotFound(): void {
+    if (this.isCustomVideo) {
+      this.router.navigate(['/']);
+      this.unsubscribe$.next();
+    } else {
+      this.isCustomVideo = false;
+      this.loadVideoFromServer();
+    }
   }
 
   private loadVideoFromServer(): void {
