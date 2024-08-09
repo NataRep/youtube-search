@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { AppState, Page, VideosState } from './store.model';
+import { AppState, PageState, VideosState } from './store.model';
 import * as AppActions from './actions';
 
 // Начальное состояние Store приложения
@@ -13,7 +13,7 @@ export const initialVideosState: VideosState = {
   favorites: [],
 };
 
-export const page: Page = {
+export const page: PageState = {
   number: 0,
   prev: null,
   next: null,

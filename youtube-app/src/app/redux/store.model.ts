@@ -6,7 +6,7 @@ export interface GlobalState {
 
 export interface AppState {
   videos: VideosState;
-  page: Page;
+  page: PageState;
   //TODO: auth - перенести состояние авторизации сюда
 }
 
@@ -15,7 +15,7 @@ export interface VideosState {
   youtubeVideos: YoutubeVideosState;
   favorites: Item[];
 }
-export interface Page {
+export interface PageState {
   number: number;
   prev: string | null;
   next: string | null;
