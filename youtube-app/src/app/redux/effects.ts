@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as AppActions from './actions';
-import { map, mergeMap, catchError } from 'rxjs/operators';
+import { map, catchError, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { SearchService } from '../core/services/search.service';
 
@@ -15,7 +15,7 @@ export class EffectsVideos {
   getVideos$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AppActions.getVideos),
-      mergeMap((action) =>
+      switchMap((action) =>
         this.searchService.getVideosWithStatistics(action.query).pipe(
           map((videos) => AppActions.getVideosSuccess({ videos })),
           catchError((error) =>
