@@ -13,7 +13,7 @@ export const initialVideosState: VideosState = {
   favorites: [],
 };
 
-export const page: PageState = {
+export const initialPageState: PageState = {
   number: 0,
   prev: null,
   next: null,
@@ -21,7 +21,7 @@ export const page: PageState = {
 
 export const initialState: AppState = {
   videos: initialVideosState,
-  page: page,
+  page: initialPageState,
 };
 
 export const reducers = createReducer(
