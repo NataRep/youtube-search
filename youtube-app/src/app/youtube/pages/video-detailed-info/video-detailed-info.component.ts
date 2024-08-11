@@ -116,7 +116,7 @@ export class VideoDetailedInfoComponent implements OnInit, OnDestroy {
     this.subscriptions.add(sub);
   }
 
- detectVideoType(url: string): void {
+  detectVideoType(url: string): void {
     const extension = url.split('.').pop()?.toLowerCase();
     switch (extension) {
       case 'mp4':
@@ -127,6 +127,9 @@ export class VideoDetailedInfoComponent implements OnInit, OnDestroy {
         break;
       case 'ogg':
         this.videoType = 'ogg';
+        break;
+      case 'avi':
+        this.videoType = 'avi';
         break;
       default:
         console.warn('Unsupported video type');
