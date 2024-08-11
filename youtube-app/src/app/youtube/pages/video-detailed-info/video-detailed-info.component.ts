@@ -55,7 +55,7 @@ export class VideoDetailedInfoComponent implements OnInit, OnDestroy {
     }
   }
 
-  private checkVideoInState(): void {
+  checkVideoInState(): void {
     const sub = this.store
       .select(selectCustomVideoById(this.videoId))
       .pipe(
@@ -76,14 +76,14 @@ export class VideoDetailedInfoComponent implements OnInit, OnDestroy {
     this.subscriptions.add(sub);
   }
 
-  private handleCustomVideoFound(video: Item): void {
+  handleCustomVideoFound(video: Item): void {
     this.videoURL = video.snippet.videoLink || '';
     this.detectVideoType(this.videoURL);
     this.isCustomVideo = true;
     this.video$ = of(video);
   }
 
-  private handleCustomVideoNotFound(): void {
+  handleCustomVideoNotFound(): void {
     if (this.isCustomVideo) {
       this.router.navigate(['/']);
       this.unsubscribe$.next();
@@ -93,7 +93,7 @@ export class VideoDetailedInfoComponent implements OnInit, OnDestroy {
     }
   }
 
-  private loadVideoFromServer(): void {
+  loadVideoFromServer(): void {
     const sub = this.searchService
       .getVideoById(this.videoId)
       .pipe(
@@ -116,7 +116,7 @@ export class VideoDetailedInfoComponent implements OnInit, OnDestroy {
     this.subscriptions.add(sub);
   }
 
-  private detectVideoType(url: string): void {
+ detectVideoType(url: string): void {
     const extension = url.split('.').pop()?.toLowerCase();
     switch (extension) {
       case 'mp4':
