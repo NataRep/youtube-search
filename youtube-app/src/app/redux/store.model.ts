@@ -6,7 +6,7 @@ export interface GlobalState {
 
 export interface AppState {
   videos: VideosState;
-  page: PageState;
+  //page: PageState;
   //TODO: auth - перенести состояние авторизации сюда
 }
 
