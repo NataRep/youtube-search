@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { AppState, PageState, VideosState } from './store.model';
+import { AppState, VideosState } from './store.model';
 import * as AppActions from './actions';
 
 // Начальное состояние Store приложения

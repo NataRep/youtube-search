@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, take } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Item } from '../../../core/models/search-item.model';
 import { Store } from '@ngrx/store';
 import { GlobalState } from '../../../redux/store.model';
