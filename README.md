@@ -7,6 +7,12 @@
 
 This is a single-page application (SPA) developed as part of the RS School Angular course in 2024. The project demonstrates working with asynchronous operations in Angular, with a focus on using the YouTube API.
 
+![Screenshot of the app](youtube-app/src/assets/images/screen.jpg)
+
+## Демо
+
+Check out [app demo](https://nuttik.github.io/youtube-search/).
+
 ## Features
 
 - Search for YouTube videos by keyword and display the results in real-time.
