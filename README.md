@@ -30,31 +30,38 @@ You can learn more about the course task [here](#) (add the actual link).
 ## Installation and Setup
 
 1. Clone the repository.
-   ```bash
-   git clone <repository-url>
-   ```
-2. Clone the repository.
+2.
+
+```bash
+git clone <repository-url>
+```
+
+2. Install dependencies.
 
 ```
-npm install
+  npm install
 ```
 
 3.  Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```
+ ng serve
+```
 
-4. Code scaffolding
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+4. Build
 
-5. Build
+```
+  ng build
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+5. To run unit tests using Jest:
 
-6. To run unit tests using Jest:
+```
+  ng test
+```
 
-Run `ng test` to execute the unit tests.
-
-7. Further help
+6. Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
