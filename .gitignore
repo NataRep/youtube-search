@@ -104,6 +104,6 @@ dist
 .tern-port
 
 # environments
-src/environments/
+/youtube-app/src/environments/
 
 
