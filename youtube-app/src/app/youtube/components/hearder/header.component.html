@@ -1,7 +1,7 @@
 <div class="container">
   <div class="tools-bar">
     <div class="search">
-      <app-logo></app-logo>
+      <app-logo (click)="goToMain()"></app-logo>
       <app-search-form></app-search-form>
       <app-search-sort-button
         (click)="showSearchTools()"

@@ -20,4 +20,8 @@ export class HeaderComponent {
   goToFavorites() {
     this.router.navigate(['/favorites']);
   }
+
+  goToMain() {
+    this.router.navigate(['/']);
+  }
 }
