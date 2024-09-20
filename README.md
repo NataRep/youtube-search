@@ -9,7 +9,7 @@ This is a single-page application (SPA) developed as part of the RS School Angul
 
 ![Screenshot of the app](youtube-app/src/assets/images/screen.jpg)
 
-## Демо
+## Demo
 
 Check out [app demo](https://nuttik.github.io/youtube-search/youtube-app/).
 
