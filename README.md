@@ -11,7 +11,9 @@ This is a single-page application (SPA) developed as part of the RS School Angul
 
 ## Демо
 
-Check out [app demo](https://nuttik.github.io/youtube-search/).
+Check out [app demo](https://nuttik.github.io/youtube-search/youtube-app/).
+
+Use any name and password for to log in.
 
 ## Features
 
@@ -31,12 +33,9 @@ Check out [app demo](https://nuttik.github.io/youtube-search/).
 
 The primary goal of this project was to gain hands-on experience with asynchronous operations and API integration in Angular. Using the YouTube API serves as a practical example of fetching and handling dynamic data.
 
-You can learn more about the course task [here](#) (add the actual link).
-
 ## Installation and Setup
 
 1. Clone the repository.
-2.
 
 ```bash
 git clone <repository-url>
