@@ -1,0 +1,14 @@
+:host {
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+img {
+  width: 3.125rem;
+  height: 3.125rem;
+  @media (max-width: 480px) {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}

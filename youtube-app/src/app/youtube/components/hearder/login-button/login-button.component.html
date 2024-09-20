@@ -1,0 +1,19 @@
+<div class="avatar" *ngIf="isLogin; else loggedOut">
+  <p>{{ userName }}</p>
+  <button mat-flat-button color="primary" [matMenuTriggerFor]="contextMenu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</div>
+
+<ng-template #loggedOut>
+  <div class="login">
+    <button mat-flat-button color="primary" (click)="goToLogin()">
+      <mat-icon>login</mat-icon>
+    </button>
+  </div>
+</ng-template>
+
+<mat-menu #contextMenu="matMenu">
+  <button mat-menu-item (click)="logout()">Logout</button>
+  <button mat-menu-item (click)="goToAdmin()">Admin page</button>
+</mat-menu>

@@ -1,0 +1,13 @@
+:host {
+  button {
+    border-radius: 0.25rem;
+    padding: 1rem 2rem;
+    font-weight: 400;
+    font-size: 0.75rem;
+    height: 1.5rem;
+  }
+  .mat-mdc-unelevated-button:not(:disabled) {
+    background-color: var(--blue-primary);
+    box-shadow: 2px 0 4px var(--blue-secondary);
+  }
+}

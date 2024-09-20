@@ -1,0 +1,22 @@
+<div class="container">
+  <ng-container *ngIf="isLoading$ | async"
+    ><p class="loading-msg">Loading...</p></ng-container
+  >
+  <ng-container *ngIf="isEmptySearch">
+    <p>Write what you want to see!</p>
+  </ng-container>
+  <ng-container *ngIf="videos$ | async as finedVideos">
+    <div *ngFor="let video of finedVideos | sortVideo; trackBy: trackById">
+      <app-video-item [item]="video"></app-video-item>
+    </div>
+    <ng-container
+      *ngIf="
+        finedVideos.length < 1 &&
+        (isLoading$ | async) === false &&
+        !isEmptySearch
+      "
+    >
+      <p>Sorry, nothing was found for your request.</p>
+    </ng-container>
+  </ng-container>
+</div>

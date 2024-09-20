@@ -1,0 +1,15 @@
+<app-card-creation-form></app-card-creation-form>
+
+<div class="videos">
+  <ng-container *ngIf="isLoading$ | async"
+    ><p class="loading-msg">Loading...</p></ng-container
+  >
+  <ng-container *ngIf="videos$ | async as finedVideos" class="container-videos">
+    <h2 *ngIf="finedVideos.length > 0">Your videos</h2>
+    <div class="container-videos">
+      <div *ngFor="let video of finedVideos | sortVideo; trackBy: trackById">
+        <app-video-item [item]="video"></app-video-item>
+      </div>
+    </div>
+  </ng-container>
+</div>

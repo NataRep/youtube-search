@@ -1,0 +1,14 @@
+<div class="item-card" [appCustomClass]="getItemPublishedDate()">
+  <app-favorite-icon [item]="item"></app-favorite-icon>
+  <app-remove-custom-button [item]="item"></app-remove-custom-button>
+  <img [src]="item.snippet.thumbnails.medium.url" alt="" />
+  <app-social-info
+    [statistics]="item.statistics"
+    class="social-row"
+  ></app-social-info>
+  <div class="item-title" title="{{ item.snippet.title }}">
+    {{ item.snippet.title | trimVideoName }}
+  </div>
+  <app-button [routerLink]="['/details', id]">more..</app-button>
+  <div class="underline"></div>
+</div>

@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="tools-bar">
+    <div class="search">
+      <app-logo (click)="goToMain()"></app-logo>
+      <app-search-form></app-search-form>
+      <app-search-sort-button
+        (click)="showSearchTools()"
+      ></app-search-sort-button>
+    </div>
+    <app-search-sort-tools *ngIf="isSearchToolsVisible"></app-search-sort-tools>
+  </div>
+  <div class="admin-block">
+    <app-login-button></app-login-button>
+
+    <mat-icon
+      (click)="goToFavorites()"
+      class="favorite-icon"
+      title="Watch a list of favorite videos"
+      >favorite</mat-icon
+    >
+  </div>
+</div>

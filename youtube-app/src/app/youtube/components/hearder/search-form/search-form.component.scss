@@ -1,0 +1,32 @@
+:host {
+  display: flex;
+  font-size: 0.75rem;
+  align-items: center;
+  width: 100%;
+
+  form {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+  button {
+    border-radius: 0 0.25rem 0.25rem 0;
+    background-color: var(--blue-primary);
+    box-shadow: 2px 0 4px var(--blue-secondary);
+    font-weight: 400;
+    font-size: 0.75rem;
+    height: 1.5rem;
+  }
+  input {
+    padding: 0.275rem 1rem;
+    border: none;
+    outline: none;
+    background-color: #efefef;
+    flex-grow: 1;
+  }
+  input:focus {
+    outline: none;
+    outline: solid 2px #2f80ed;
+    outline-offset: -2px;
+  }
+}

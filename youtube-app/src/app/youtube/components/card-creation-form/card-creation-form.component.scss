@@ -1,0 +1,83 @@
+:host {
+  display: block;
+  width: fit-content;
+  padding: 2rem;
+  background-color: #f2f2f2;
+  border-radius: 0.5rem;
+
+  @media (max-width: 380px) {
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  form {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+
+    @media (max-width: 400px) {
+      width: 260px;
+    }
+
+    ::ng-deep
+      mat-form-field
+      .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+      background-color: var(--grey-bg);
+    }
+
+    app-button {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+    app-button.button_add {
+      margin-top: 0rem;
+    }
+    ::ng-deep mat-form-field .mdc-text-field--filled .mdc-floating-label {
+      font-size: 0.75rem;
+    }
+    ::ng-deep mat-form-field input {
+      font-size: 0.75rem;
+    }
+  }
+  .subform {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .created-msg {
+    opacity: 0;
+    background: var(--green-secondary);
+    padding: 1rem;
+    z-index: 2;
+    font-size: 1rem;
+    border-left: 4px solid var(--green-primary);
+    animation: fadeInOut 5s ease-in-out forwards;
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

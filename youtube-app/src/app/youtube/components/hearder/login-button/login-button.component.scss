@@ -1,0 +1,56 @@
+:host {
+  display: flex;
+  max-width: 240px;
+  justify-content: flex-end;
+  margin-left: 1.5rem;
+
+  @media (max-width: 980px) {
+    right: 1rem;
+  }
+
+  @media (max-width: 580px) {
+    right: 0rem;
+  }
+
+  button {
+    border-radius: 0.25rem;
+    background-color: var(--blue-primary);
+    box-shadow: 2px 0 4px var(--blue-secondary);
+    padding: 0;
+    height: 1.5rem;
+    min-width: 1.5rem;
+  }
+
+  .avatar {
+    button {
+      background: none;
+      box-shadow: none;
+      color: var(--blue-primary);
+      font-size: 1rem;
+    }
+    ::ng-deep .mat-mdc-unelevated-button > .mat-icon {
+      font-size: 1.75rem;
+      height: 1.75rem;
+      width: 1.75rem;
+    }
+  }
+  .login {
+    button {
+      background-color: var(--blue-primary);
+      box-shadow: 2px 0 4px var(--blue-secondary);
+    }
+  }
+  mat-icon {
+    margin: 0;
+  }
+  .avatar,
+  .login {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    p {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}

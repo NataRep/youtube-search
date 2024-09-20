@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  margin: auto;
+  margin-top: 30dvh;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+  max-width: 340px;
+  p {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,15 @@
+:host {
+  background-color: var(--black-text);
+  color: var(--grey-bg);
+  a {
+    color: var(--grey-bg);
+  }
+}
+.container {
+  width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 0.5rem 0;
+}
