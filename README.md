@@ -13,7 +13,7 @@ This is a single-page application (SPA) developed as part of the RS School Angul
 
 Check out [app demo](https://nuttik.github.io/youtube-search/youtube-app/).
 
-Use any name and password for to log in.
+Use any email and password for to log in.
 
 ## Features
 
